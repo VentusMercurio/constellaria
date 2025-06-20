@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 // UPDATED: Now only importing the components we need directly on this page
 import BirthDetailsCard from '@/components/BirthDetailsCard';
 import PlanetList from '@/components/PlanetList';
+import ChartWheel from '@/components/ChartWheel';
+
 
 // --- Data Types (for type safety) ---
 interface AstrologicalPoint {
@@ -28,7 +30,7 @@ interface NatalChartDetails {
   planets: AstrologicalPoint[];
 }
 
-// --- Display Component ---
+// --- Display Component (Updated) ---
 function ChartDisplay({ chartData, timezone, onContinue }: { chartData: NatalChartDetails, timezone: string, onContinue: () => void }) {
   return (
     <div className="w-full max-w-lg text-center animate-fade-in space-y-8">
@@ -41,6 +43,11 @@ function ChartDisplay({ chartData, timezone, onContinue }: { chartData: NatalCha
         </p>
       </div>
 
+      {/* NEW: Center the chart wheel */}
+      <div className="flex justify-center">
+        <ChartWheel chartData={chartData} size={300} />
+      </div>
+
       <BirthDetailsCard 
         birthDateTimeUTC={chartData.birthDateTimeUTC}
         latitude={chartData.latitude}
@@ -48,7 +55,6 @@ function ChartDisplay({ chartData, timezone, onContinue }: { chartData: NatalCha
         timezone={timezone}
       />
       
-      {/* UPDATED: Using our new, self-contained PlanetList component */}
       <PlanetList planets={chartData.planets} />
 
       <div className="pt-4">
@@ -62,7 +68,6 @@ function ChartDisplay({ chartData, timezone, onContinue }: { chartData: NatalCha
     </div>
   );
 }
-
 
 // --- Main Page Component ---
 export default function NatalChartPage() {
