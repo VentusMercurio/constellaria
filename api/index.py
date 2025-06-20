@@ -83,13 +83,17 @@ def calculate_natal_chart(data: BirthData):
         ascendant_data = format_astro_point(subject.ascendant)
         midheaven_data = format_astro_point(subject.medium_coeli)
 
-        # 4. Construct the final JSON response
+# 4. Construct the final JSON response
         natal_chart_details = {
-            "ascendant": ascendant_data, "midheaven": midheaven_data,
-            "houseCusps": house_cusps_data, "planets": planets_data
+            "birthDateTimeUTC": aware_dt.astimezone(pytz.utc).isoformat(), # ADD THIS LINE BACK
+            "latitude": data.latitude,                                  # ADD THIS LINE BACK
+            "longitude": data.longitude,                                # ADD THIS LINE BACK
+            "ascendant": ascendant_data,
+            "midheaven": midheaven_data,
+            "houseCusps": house_cusps_data,
+            "planets": planets_data,
         }
         return natal_chart_details
-
     except Exception as e:
         print("--- DETAILED PYTHON ERROR ---")
         traceback.print_exc()
