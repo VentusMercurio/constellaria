@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- NEW ANIMATION CODE STARTS HERE --- */
+
+/* Register the --gradient-angle custom property for smooth animation */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Define the rotation animation */
+@keyframes rotation {
+  0% {
+    --gradient-angle: 0deg;
+  }
+  100% {
+    --gradient-angle: 360deg;
+  }
+}
+
+/* The main button container */
+.shiny-button {
+  position: relative; /* Establishes a positioning context */
+  isolation: isolate; /* Creates a new stacking context for z-index */
+  overflow: hidden;   /* Hides the parts of the spinning gradient that go outside the rounded corners */
+  border-radius: 9999px; /* This must match the inner span's border-radius */
+}
+
+/* The spinning gradient layer, placed behind everything else */
+.shiny-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2; /* Sits at the very back */
+  
+  /* The animated white/yellow gradient */
+  background: conic-gradient(
+    from var(--gradient-angle),
+    #FBBF24, /* A vibrant yellow */
+    #FFFFFF, /* White */
+    #FBBF24  /* Back to yellow to complete the loop */
+  );
+  
+  animation: rotation 3s linear infinite;
+}
+
+/* The dark background layer that sits on top of the gradient */
+.shiny-button::after {
+  content: '';
+  position: absolute;
+  top: 2px; /* This creates the border thickness */
+  left: 2px; /* This creates the border thickness */
+  width: calc(100% - 4px); /* Account for the border on both sides */
+  height: calc(100% - 4px); /* Account for the border on both sides */
+  z-index: -1; /* Sits between the gradient and the text */
+  
+  /* Make it match the page background (Tailwind's gray-900) */
+  background: #111827; 
+  
+  border-radius: 9999px; /* This must match the main container's border-radius */
+}
+
+/* --- NEW ANIMATION CODE ENDS HERE --- */
