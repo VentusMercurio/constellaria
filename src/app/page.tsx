@@ -18,7 +18,7 @@ export default function LandingPage() {
         {/* This div is now the animation container. It's rounded and clips the overflow. */}
         <div className="shiny-button inline-block">
           <Link 
-            href="/register"
+            href="/auth/register"
             className="block font-sans font-bold text-white px-8 py-4 bg-button-gradient hover:bg-button-gradient-hover transition-all duration-300 ease-in-out shadow-lg shadow-brand-red/20 transform hover:scale-105 rounded-full"
           >
             Begin Your Journey
