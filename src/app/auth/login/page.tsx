@@ -1,4 +1,4 @@
-'use client'; // This is a client-side interactive component
+'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -10,24 +10,34 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const supabase = createClient();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
+    const supabase = createClient();
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
     });
 
     if (error) {
-      console.error('Login Error:', error.message);
       setError(error.message);
-    } else {
-      // Login successful! Redirect to the dashboard.
-      router.push('/dashboard');
-      // We also want to refresh the page to ensure the new session is picked up by the server
+    } else if (data.user) {
+      // THIS IS THE NEW LOGIC: After successful login, check for a profile.
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('id', data.user.id)
+        .single();
+      
+      if (profile) {
+        // If profile exists, they are a returning user. Go to dashboard.
+        router.push('/dashboard');
+      } else {
+        // If no profile, they are a new user. Go to onboarding.
+        router.push('/onboarding/natal-chart');
+      }
       router.refresh();
     }
   };
@@ -37,11 +47,9 @@ export default function LoginPage() {
       <div className="w-full max-w-md text-center">
         <h1 className="font-serif text-5xl font-bold mb-2">Welcome Back</h1>
         <p className="text-gray-400 mb-8">Sign in to your account.</p>
-
         <form onSubmit={handleLogin} className="bg-gray-800 p-8 rounded-2xl shadow-xl space-y-6">
           <input
             type="email"
-            name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Your Email"
@@ -50,24 +58,16 @@ export default function LoginPage() {
           />
           <input
             type="password"
-            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Your Password"
             required
             className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
           />
-
-          <button
-            type="submit"
-            className="w-full font-sans font-bold text-white px-8 py-3 rounded-full bg-button-gradient hover:bg-button-gradient-hover transition-all duration-300 ease-in-out shadow-lg shadow-brand-red/20 transform hover:scale-105"
-          >
+          <button type="submit" className="w-full font-sans font-bold text-white px-8 py-3 rounded-full bg-button-gradient hover:bg-button-gradient-hover">
             Log In
           </button>
-
-          {error && (
-            <p className="text-red-500 text-sm mt-4">{error}</p>
-          )}
+          {error && <p className="text-red-500 text-sm mt-4">{error}</p>}
         </form>
         <p className="text-gray-500 text-sm mt-6">
           Don't have an account?{' '}

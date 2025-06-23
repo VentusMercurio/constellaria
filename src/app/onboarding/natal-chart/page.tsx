@@ -2,14 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-
-// UPDATED: Now only importing the components we need directly on this page
 import BirthDetailsCard from '@/components/BirthDetailsCard';
 import PlanetList from '@/components/PlanetList';
 import ChartWheel from '@/components/ChartWheel';
 import { createClient } from '@/lib/supabase/client';
-
-
 
 // --- Data Types (for type safety) ---
 interface AstrologicalPoint {
@@ -32,7 +28,7 @@ interface NatalChartDetails {
   planets: AstrologicalPoint[];
 }
 
-// --- Display Component (Updated) ---
+// --- Display Component ---
 function ChartDisplay({ chartData, timezone, onContinue }: { chartData: NatalChartDetails, timezone: string, onContinue: () => void }) {
   return (
     <div className="w-full max-w-lg text-center animate-fade-in space-y-8">
@@ -45,7 +41,6 @@ function ChartDisplay({ chartData, timezone, onContinue }: { chartData: NatalCha
         </p>
       </div>
 
-      {/* NEW: Center the chart wheel */}
       <div className="flex justify-center">
         <ChartWheel chartData={chartData} size={300} />
       </div>
@@ -109,7 +104,7 @@ export default function NatalChartPage() {
     }
   };
 
-  // --- UPDATED: handleSubmit function now saves the data ---
+  // --- THIS IS THE CORRECTED handleSubmit FUNCTION ---
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!latitude || !longitude || !timezone) {
@@ -120,7 +115,7 @@ export default function NatalChartPage() {
     setError(null);
 
     try {
-      // 1. Calculate the chart (this part is the same)
+      // 1. Calculate the chart
       const response = await fetch('/api/calculate-chart', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -131,36 +126,23 @@ export default function NatalChartPage() {
         throw new Error(resultData.error || 'An error occurred during chart calculation.');
       }
       
-      // 2. THIS IS THE NEW PART: Save the data to Supabase
+      // 2. Save the data to Supabase
       const supabase = createClient();
-
-      // First, get the current logged-in user's ID
       const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Could not find user. Please log in again.");
 
-      if (!user) {
-        throw new Error("Could not find user. Please log in again.");
-      }
-
-      // Find the user's Sun sign from the calculated data
       const sunSign = resultData.planets.find((p: AstrologicalPoint) => p.name === 'Sun')?.sign || 'Unknown';
-
-      // Prepare the data for our 'profiles' table
       const profileData = {
-        id: user.id, // This links the profile to the user's account
+        id: user.id,
         updated_at: new Date().toISOString(),
         sun_sign: sunSign,
-        chart_data: resultData, // Store the entire JSON object
+        chart_data: resultData,
       };
 
-      // Use 'upsert' to either insert a new profile or update an existing one
       const { error: upsertError } = await supabase.from('profiles').upsert(profileData);
+      if (upsertError) throw upsertError;
 
-      if (upsertError) {
-        // If saving fails, throw an error
-        throw upsertError;
-      }
-
-      // 3. If everything is successful, set the chart data to trigger the display
+      // 3. THIS IS THE FIX: Set the state to display the results on THIS page
       setChartData(resultData);
 
     } catch (err: any) {
@@ -170,13 +152,15 @@ export default function NatalChartPage() {
       setIsLoading(false);
     }
   };
-
+  
   const handleContinue = () => {
+    // This function is now only used by the button on the results display
     router.push('/dashboard');
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-900">
+      {/* This conditional rendering will now work correctly */}
       {chartData && timezone ? (
         <ChartDisplay chartData={chartData} timezone={timezone} onContinue={handleContinue} />
       ) : (
@@ -188,6 +172,7 @@ export default function NatalChartPage() {
               To reveal your chart, Sophia needs to know when and where your journey began.
             </p>
             <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-2xl shadow-xl space-y-4">
+              {/* Form inputs remain the same */}
               <input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-fuchsia-500" />
               <input type="time" value={birthTime} onChange={(e) => setBirthTime(e.target.value)} required className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-fuchsia-500" />
               <div className="pt-4 space-y-2">
