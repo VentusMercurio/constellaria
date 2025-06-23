@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation';
 import BirthDetailsCard from '@/components/BirthDetailsCard';
 import PlanetList from '@/components/PlanetList';
 import ChartWheel from '@/components/ChartWheel';
+import { createClient } from '@/lib/supabase/client';
+
 
 
 // --- Data Types (for type safety) ---
@@ -107,6 +109,7 @@ export default function NatalChartPage() {
     }
   };
 
+  // --- UPDATED: handleSubmit function now saves the data ---
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!latitude || !longitude || !timezone) {
@@ -115,7 +118,9 @@ export default function NatalChartPage() {
     }
     setIsLoading(true);
     setError(null);
+
     try {
+      // 1. Calculate the chart (this part is the same)
       const response = await fetch('/api/calculate-chart', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -125,8 +130,41 @@ export default function NatalChartPage() {
       if (!response.ok) {
         throw new Error(resultData.error || 'An error occurred during chart calculation.');
       }
+      
+      // 2. THIS IS THE NEW PART: Save the data to Supabase
+      const supabase = createClient();
+
+      // First, get the current logged-in user's ID
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (!user) {
+        throw new Error("Could not find user. Please log in again.");
+      }
+
+      // Find the user's Sun sign from the calculated data
+      const sunSign = resultData.planets.find((p: AstrologicalPoint) => p.name === 'Sun')?.sign || 'Unknown';
+
+      // Prepare the data for our 'profiles' table
+      const profileData = {
+        id: user.id, // This links the profile to the user's account
+        updated_at: new Date().toISOString(),
+        sun_sign: sunSign,
+        chart_data: resultData, // Store the entire JSON object
+      };
+
+      // Use 'upsert' to either insert a new profile or update an existing one
+      const { error: upsertError } = await supabase.from('profiles').upsert(profileData);
+
+      if (upsertError) {
+        // If saving fails, throw an error
+        throw upsertError;
+      }
+
+      // 3. If everything is successful, set the chart data to trigger the display
       setChartData(resultData);
+
     } catch (err: any) {
+      console.error("Frontend Error:", err);
       setError(err.message);
     } finally {
       setIsLoading(false);
