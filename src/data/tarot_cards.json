@@ -1,0 +1,783 @@
+[
+  {
+    "id": "major_00",
+    "name": "Innocence",
+    "suit": "Major",
+    "value": 0,
+    "keywords": ["beginnings", "purity", "potential", "new path"],
+    "meaning_upright": "Innocence is not ignorance. It is the sacred purity of one who has not yet been shaped by fear. This card marks a threshold moment—your first step onto the path, before roles are worn, before ego sets in. You are still soft, still whole, still wild with possibility. But you are not empty—you are complete in your becoming. Trust the path ahead, even if it is undefined. Risk being seen in your naked radiance.",
+    "meaning_reversed": "Recklessness, naivety, hesitation, vulnerability, unreadiness for the path.",
+    "image": "major_00_innocence.png"
+  },
+  {
+    "id": "major_01",
+    "name": "Magus",
+    "suit": "Major",
+    "value": 1,
+    "keywords": ["willpower", "creation", "manifestation", "skill"],
+    "meaning_upright": "The Magus is the one who remembers: that all form begins in the mind. He does not ask for permission—he speaks the Word. This card appears when your thoughts, desires, and actions are aligning into power. Your tools are already present—now arrange them. Shape the field. Focus your voice, your breath, your intention. You are not here to obey the laws of nature. You are here to name them anew.",
+    "meaning_reversed": "Manipulation, poor planning, untapped potential, illusion, lack of focus.",
+    "image": "major_01_magus.png"
+  },
+  {
+    "id": "major_02",
+    "name": "Oracle",
+    "suit": "Major",
+    "value": 2,
+    "keywords": ["intuition", "wisdom", "mystery", "inner knowing"],
+    "meaning_upright": "The Oracle holds the secrets that you are already beginning to remember. She is the bridge between dream and waking, between what is said and what is true. When she appears, you are being invited to listen—not with your ears, but with your inner current. This is a moment of sacred pause. Not all knowledge must be spoken aloud. What you seek is already inside you. Trust the pull. Honor the silence. And when your voice returns—it will be changed.",
+    "meaning_reversed": "Hidden truths, denial, withdrawal, secrets, misinterpretation, lack of inner wisdom.",
+    "image": "major_02_oracle.png"
+  },
+  {
+    "id": "major_03",
+    "name": "Presence",
+    "suit": "Major",
+    "value": 3,
+    "keywords": ["creation", "fertility", "abundance", "embodiment", "magnetism"],
+    "meaning_upright": "Presence is the realm of embodied power. She does not reach—she draws in. Through her magnetism, things grow. She teaches that creation is not just about making, but about becoming the space where life can flourish. When this card appears, you are being called into embodiment, into pleasure, into sovereignty. What you feel, what you touch, what you nourish—these are your spells. You do not need permission to take up space. You are the garden. Let it bloom.",
+    "meaning_reversed": "Dependency, creative block, lack of nurturing, insecurity, materialism.",
+    "image": "major_03_presence.png"
+  },
+  {
+    "id": "major_04",
+    "name": "Dominion",
+    "suit": "Major",
+    "value": 4,
+    "keywords": ["authority", "structure", "control", "leadership", "stability"],
+    "meaning_upright": "Dominion is the sacred art of holding. Of anchoring the world when storms come. He does not control through fear, but through inspired authority and natural leadership. You are being called to step into your Sovereignty. Into the part of you that builds what lasts. This is not the time to drift. It is the time to declare what is yours, and guard it with everything you are",
+    "meaning_reversed": "Tyranny, rigidity, control issues, instability, resistance to authority, fear of power.",
+    "image": "major_04_dominion.png"
+  },
+  {
+    "id": "major_05",
+    "name": "Scripture",
+    "suit": "Major",
+    "value": 5,
+    "keywords": ["teaching", "tradition", "wisdom", "guidance", "belief"],
+    "meaning_upright": "Scripture is not doctrine. It is the sacred truth written in your own becoming. He appears when you are being called to teach, to transmit, to embody a message greater than yourself. But beware: true authority does not demand—it demonstrates. When this card rises, your voice carries weight. Your presence becomes initiation. Ask: What are you here to preserve? What are you here to awaken? And can you walk the path of wisdom without becoming the cage?",
+    "meaning_reversed": "Dogma, rebellion, unorthodoxy, misguidance, conventionality, restrictive beliefs.",
+    "image": "major_05_scripture.png"
+  },
+  {
+    "id": "major_06",
+    "name": "Embrace",
+    "suit": "Major",
+    "value": 6,
+    "keywords": ["love", "union", "choice", "relationship", "devotion"],
+    "meaning_upright": "Mythic love, the kind that causes you to change your entire life. It is the ache that cracks open the soul and dares you to remain bare. When Embrace appears, the question is not do you love them? It is: Are you ready to be transformed by what you love?",
+    "meaning_reversed": "Disharmony, separation, imbalance, unrequited love, conflicting choices.",
+    "image": "major_06_embrace.png"
+  },
+  {
+    "id": "major_07",
+    "name": "Drive",
+    "suit": "Major",
+    "value": 7,
+    "keywords": ["willpower", "ambition", "victory", "momentum", "control"],
+    "meaning_upright": "The spirit of indomitable will. This is the vehicle of your concentrated effort and focus. Something within you has aligned—intention, instinct, and momentum moving as one. This is not aimless speed. This is purpose in motion. Obstacles may rise, but they cannot hold against a will that refuses to fracture. Take the reins. Tighten your focus. You are not drifting—you are arriving.",
+    "meaning_reversed": "Lack of control, defeat, unfocused energy, opposition, aggression, self-sabotage.",
+    "image": "major_07_drive.png"
+  },
+  {
+    "id": "major_08",
+    "name": "Balance",
+    "suit": "Major",
+    "value": 8,
+    "keywords": ["justice", "fairness", "causality", "truth", "accountability"],
+    "meaning_upright": "The bill comes due. Always. Do not fear a cosmic reckoning. Understand the principle of causality: every effect has its cause. Balance does not seek to harm, only to align. When this card appears, know that the scale is tilting. Something must be answered for. But this is your liberation, not your doom. Step forward. Speak the truth. Accept the echo. And walk clean through the fire.",
+    "meaning_reversed": "Injustice, unfairness, dishonesty, bias, legal complications, unresolved issues.",
+    "image": "major_08_balance.png"
+  },
+  {
+    "id": "major_09",
+    "name": "Solitude",
+    "suit": "Major",
+    "value": 9,
+    "keywords": ["introspection", "guidance", "wisdom", "retreat", "self-discovery"],
+    "meaning_upright": "Solitude is not loneliness. It is the holy act of stepping away—to remember. When this card appears, it is not a retreat in fear, but a pilgrimage inward. You are being asked to stop reaching, stop speaking, stop seeking outside yourself. There is something waiting in the stillness. A light that only reveals itself when all others dim. You are not being abandoned. You are being summoned—into clarity, into presence, into the unshakeable core of who you are. Walk alone. And listen.",
+    "meaning_reversed": "Loneliness, isolation, withdrawal, fear of solitude, foolish guidance, lack of self-reflection.",
+    "image": "major_09_solitude.png"
+  },
+  {
+    "id": "major_10",
+    "name": "Fortune",
+    "suit": "Major",
+    "value": 10,
+    "keywords": ["luck", "change", "destiny", "cycles", "opportunity"],
+    "meaning_upright": "Fortune doesn’t reward virtue. She doesn’t punish sin. She simply moves—and you move with her. This is the card of the unknown variable, the bounce, the break, the snap of timing that turns triumph into tragedy—or back again. When Fortune appears, understand: you are in the spin. You might win it all. Or you might lose. You must ask yourself: do you feel lucky?",
+    "meaning_reversed": "Bad luck, resistance to change, stagnation, unexpected setbacks, feeling stuck.",
+    "image": "major_10_fortune.png"
+  },
+  {
+    "id": "major_11",
+    "name": "Command",
+    "suit": "Major",
+    "value": 11,
+    "keywords": ["strength", "courage", "inner power", "self-control", "compassion"],
+    "meaning_upright": "You are the undeniable center of the field. Your will is indomitable. This is the moment to anchor into your spine, into your breath, into the pulse of who you are. You don’t need to prove yourself. You are the proof. Speak with restraint. Move with intention. Let your gravity speak for you. Command the field. Tame the beast with presence alone.",
+    "meaning_reversed": "Weakness, self-doubt, lack of control, raw emotion, aggression, insecurity.",
+    "image": "major_11_command.png"
+  },
+  {
+    "id": "major_12",
+    "name": "Surrender",
+    "suit": "Major",
+    "value": 12,
+    "keywords": ["sacrifice", "release", "new perspective", "letting go", "suspension"],
+    "meaning_upright": "The work now is not in doing, but in releasing. Let go. Let yourself fall. And watch what rises in the silence.",
+    "meaning_reversed": "Resistance, martyrdom, unnecessary sacrifice, stagnation, inability to let go.",
+    "image": "major_12_surrender.png"
+  },
+  {
+    "id": "major_13",
+    "name": "Threshold",
+    "suit": "Major",
+    "value": 13,
+    "keywords": ["transformation", "ending", "new beginnings", "transition", "letting go"],
+    "meaning_upright": "Once you cross the Threshold, everything changes. There is no going back to what was before. Do not mourn what has passed, but ride onwards with confidence and poise.",
+    "meaning_reversed": "Resistance to change, fear of endings, stagnation, clinging to the past, prolonged transition.",
+    "image": "major_13_threshold.png"
+  },
+  {
+    "id": "major_14",
+    "name": "Alchemy",
+    "suit": "Major",
+    "value": 14,
+    "keywords": ["balance", "moderation", "integration", "healing", "transformation"],
+    "meaning_upright": "You have passed through calcination—the burning away of illusion. You are dissolving what no longer holds form—dissolution. And now you stand at conjunction: the sacred marriage of opposites. This is not harmony through dilution, but through intention. Bring the fire of will to the water of surrender. Let spirit bind with flesh. Let shadow embrace light. In this moment, the vessel is you. The gold is not outside you. It is what you become.",
+    "meaning_reversed": "Imbalance, excess, discord, lack of integration, impatience, ungroundedness.",
+    "image": "major_14_alchemy.png"
+  },
+  {
+    "id": "major_15",
+    "name": "Bondage",
+    "suit": "Major",
+    "value": 15,
+    "keywords": ["temptation", "addiction", "restriction", "materialism", "shadow self"],
+    "meaning_upright": "Your chains are lightly fettered—but they are chains nonetheless. You are being called to examine the nature of your desires. Do they serve you—or another? Are you exalted or demeaned by them? Are you using… or being used? Temptation does not always appear as sin. Sometimes, it arrives wrapped in pleasure, prestige, or even purpose. This card is not an accusation—it is an invitation: to see what binds you clearly. The only question remains: do you wish to be free?",
+    "meaning_reversed": "Breaking free, enlightenment, detachment, overcoming addiction, self-awareness, revelation.",
+    "image": "major_15_temptation.png"
+  },
+  {
+    "id": "major_16",
+    "name": "Calamity",
+    "suit": "Major",
+    "value": 16,
+    "keywords": ["disruption", "collapse", "revelation", "liberation", "sudden change"],
+    "meaning_upright": "Calamity arrives not to punish, but to reveal. When this card strikes, something that once felt immovable collapses—because it was never truly stable. The story is crumbling. The mask is slipping. The scaffolding shakes because your soul is growing too large for the lie. This is pain, yes. But it is liberation through fire. You cannot save what was never real. Don’t cling. Don’t scramble. Let it burn. And when the ash settles, look at what survived. That’s who you truly are.",
+    "meaning_reversed": "Disaster avoided, clinging to old structures, prolonged crisis, fear of change, oppression.",
+    "image": "major_16_calamity.png"
+  },
+  {
+    "id": "major_17",
+    "name": "Hope",
+    "suit": "Major",
+    "value": 17,
+    "keywords": ["hope", "inspiration", "renewal", "serenity", "healing"],
+    "meaning_upright": "Hope is the radiant presence that says, “Keep going”, even if you don't know where it will lead you. Hope is not passive. It is the act of aligning yourself to something eternal. A signal from the part of you that never gave up. Fix your gaze. Drink in the light. Let it recalibrate your soul. And know that this too shall pass.",
+    "meaning_reversed": "Despair, discouragement, pessimism, lack of inspiration, feeling lost.",
+    "image": "major_17_hope.png"
+  },
+  {
+    "id": "major_18",
+    "name": "Reflection",
+    "suit": "Major",
+    "value": 18,
+    "keywords": ["illusion", "intuition", "subconscious", "fear", "dreams"],
+    "meaning_upright": "Reflection invites you to take a long, hard look at yourself. What stirs beneath the surface? Are your depths tranquil and placid… or a raging tempest, a ship tossed by obsidian waves? Still yourself. Gaze at your reflection in the moonlight. Ask, truly and without armor: Who am I?",
+    "meaning_reversed": "Confusion, fear, deception, unacknowledged fears, nightmares, clarity obscured.",
+    "image": "major_18_reflection.png"
+  },
+  {
+    "id": "major_19",
+    "name": "Radiance",
+    "suit": "Major",
+    "value": 19,
+    "keywords": ["joy", "success", "vitality", "enlightenment", "optimism"],
+    "meaning_upright": "There is no need to dim your light here. Let yourself be seen. Let yourself be celebrated. You are not too much—you are finally enough.",
+    "meaning_reversed": "Lack of clarity, sadness, illusion, unrealistic expectations, ego, feeling overwhelmed.",
+    "image": "major_19_radiance.png"
+  },
+  {
+    "id": "major_20",
+    "name": "Horizon",
+    "suit": "Major",
+    "value": 20,
+    "keywords": ["judgment", "awakening", "resurrection", "calling", "accountability"],
+    "meaning_upright": "Retrocausality is a concept most people never grasp in their entire lives. You are being called to entertain the notion that maybe, just maybe, it is you who is calling to you from beyond the veil.",
+    "meaning_reversed": "Self-doubt, refusal to self-evaluate, delay, indecision, feeling judged, ignoring a calling.",
+    "image": "major_20_horizon.png"
+  },
+  {
+    "id": "major_21",
+    "name": "Apotheosis",
+    "suit": "Major",
+    "value": 21,
+    "keywords": ["completion", "fulfillment", "wholeness", "achievement", "integration"],
+    "meaning_upright": "The cycle is ended. It is time to reflect on the journey that brought you here. Every twist of fate, every chance encounter, every missed opportunity—they were all part of it. Take a breath. Honor what has been woven. For even now, in Apotheosis, you are not finished. And even at the height of completion, your eyes begin to turn toward the next great endeavor.",
+    "meaning_reversed": "Incompletion, stagnation, lack of closure, unfinished business, resistance to new beginnings.",
+    "image": "major_21_apotheosis.png"
+  },
+
+  {
+    "id": "pentacles_king",
+    "name": "King of Eden",
+    "suit": "Pentacles",
+    "value": "King",
+    "keywords": ["abundance", "leadership", "cultivation", "generosity", "stability"],
+    "meaning_upright": "Where can you cultivate instead of command? What can you structure to bear fruit for many? He is the answer to scarcity—not by force, but by flourishing. Take stock of your assets, not to hoard, but to give.",
+    "meaning_reversed": "Materialism, greed, controlling, ungenerous, financial instability, exploitation.",
+    "image": "court_core_01_sovereign.png"
+  },
+  {
+    "id": "pentacles_queen",
+    "name": "Queen of Eden",
+    "suit": "Pentacles",
+    "value": "Queen",
+    "keywords": ["nurturing", "fertility", "practicality", "security", "homemaking"],
+    "meaning_upright": "The Queen of Eden embodies the sacred act of tending—of birthing beauty, nurturing legacy, and governing through resonance. Her power is not taken but grown, and all that thrives in her presence becomes part of the garden.",
+    "meaning_reversed": "Dependency, martyrdom, possessiveness, domestic disarray, financial insecurity, neglect.",
+    "image": "court_core_02_consort.png"
+  },
+  {
+    "id": "pentacles_knight",
+    "name": "Knight of Eden",
+    "suit": "Pentacles",
+    "value": "Knight",
+    "keywords": ["diligence", "responsibility", "perseverance", "reliability", "hard work"],
+    "meaning_upright": "The Knight of Eden is the embodiment of steadfast work—refining chaos into form, building a paradise with his own hands. He does not rush or fantasize; he listens to the soil, hammers with rhythm, and trusts the slow fire of becoming.",
+    "meaning_reversed": "Laziness, stagnation, unreliability, impracticality, obsession with details, complacency.",
+    "image": "court_core_03_vanguard.png"
+  },
+  {
+    "id": "pentacles_page",
+    "name": "Page of Eden",
+    "suit": "Pentacles",
+    "value": "Page",
+    "keywords": ["opportunity", "new beginnings", "study", "diligence", "material potential", "revelation of value"],
+    "meaning_upright": "She is the story your material world tells about your inner world. What legacy am I signaling?",
+    "meaning_reversed": "Lack of focus, financial immaturity, missed opportunities, laziness, instability, bad news regarding material matters.",
+    "image": "court_core_04_signifer.png"
+  },
+  {
+    "id": "wands_king",
+    "name": "King of Flames",
+    "suit": "Wands",
+    "value": "King",
+    "keywords": ["vision", "inspiration", "leadership", "creativity", "charisma", "boldness"],
+    "meaning_upright": "The King of Flames is the living axis of will. He does not follow trends—he sets them ablaze. When this card appears, you are being called to lead from passion, not position. He is vision made visible, charisma incarnate.",
+    "meaning_reversed": "Tyranny, impulsiveness, domineering, forceful, ego-driven, lack of self-control, exhaustion.",
+    "image": "court_flame_01_sovereign.png"
+  },
+  {
+    "id": "wands_queen",
+    "name": "Queen of Flames",
+    "suit": "Wands",
+    "value": "Queen",
+    "keywords": ["passion", "magnetism", "attraction", "transformation", "creativity", "radiance"],
+    "meaning_upright": "Fluid. Magnetic. Impossible to hold, yet impossible to forget. Protean and mercurial. When she appears, she calls you to awaken the art of attraction through magnetism. She does not seize—she seduces. She does not burn out—she transforms. Her flame does not roar. It glows, glistens, devours. And in her orbit, nothing stays untouched.",
+    "meaning_reversed": "Demanding, vengeful, jealous, unfaithful, selfish, domineering, volatile.",
+    "image": "court_flame_02_consort.png"
+  },
+  {
+    "id": "wands_knight",
+    "name": "Knight of Flames",
+    "suit": "Wands",
+    "value": "Knight",
+    "keywords": ["action", "pursuit", "impulsiveness", "adventure", "energy", "velocity"],
+    "meaning_upright": "The Knight of Flames is passion in motion, fire accelerated by clarity of thought. This is the card of action, pursuit, and unapologetic drive. When he arrives, he says: Go now. Burn fast. Adjust later. But beware—he is not endless fire. If untethered, he consumes himself. Move with vision, not just velocity. You are not a spark. You are a storm of heat and breath.",
+    "meaning_reversed": "Recklessness, haste, lack of direction, arrogance, aggression, self-destruction, feeling burned out.",
+    "image": "court_flame_03_vanguard.png"
+  },
+  {
+    "id": "wands_page",
+    "name": "Page of Flames",
+    "suit": "Wands",
+    "value": "Page",
+    "keywords": ["enthusiasm", "inspiration", "new ideas", "courage", "discovery", "spark"],
+    "meaning_upright": "The spark of bold desire—the raw, untested fire that leaps before it learns. This card marks the beginning of passion, of purpose not yet shaped into mastery. There will be mistakes, yes. But there will also be moments of brilliance, sheer momentum, and the kind of magic that only lives in those who are willing to burn for what they want. Fan the spark. Feed the fire. Let the path reveal itself through action.",
+    "meaning_reversed": "Lack of enthusiasm, creative blocks, indecision, feeling timid, unfulfilled desires, false promises.",
+    "image": "court_flame_04_signifer.png"
+  },
+  {
+    "id": "cups_king",
+    "name": "King of Flow",
+    "suit": "Cups",
+    "value": "King",
+    "keywords": ["compassion", "emotional maturity", "creativity", "wisdom", "empathy", "calmness"],
+    "meaning_upright": "You are being called to lead through love and acceptance. Steady your heart. Let emotion move through you. Be still like water.",
+    "meaning_reversed": "Emotional manipulation, moodiness, detachment, suppressed emotions, unfeeling, overwhelm.",
+    "image": "court_flow_01_sovereign.png"
+  },
+  {
+    "id": "cups_queen",
+    "name": "Queen of Flow",
+    "suit": "Cups",
+    "value": "Queen",
+    "keywords": ["empathy", "intuition", "compassion", "healing", "sensitivity", "connection"],
+    "meaning_upright": "Empathic, poetic, and elusive, he offers deep connection. Surrender to emotion without losing yourself. Let stillness reveal truth. Let gentleness guide your hand.",
+    "meaning_reversed": "Emotional instability, insecurity, codependency, manipulation, overwhelming emotions, self-pity.",
+    "image": "court_flow_02_consort.png"
+  },
+  {
+    "id": "cups_knight",
+    "name": "Knight of Flow",
+    "suit": "Cups",
+    "value": "Knight",
+    "keywords": ["romance", "charm", "offer", "imagination", "sensitivity", "diplomacy"],
+    "meaning_upright": "Irresistible, intoxicating, and calculated. She uses feeling like perfume: alluring but sharp. There is great power in reading the field.",
+    "meaning_reversed": "Deception, moodiness, unrealistic expectations, immaturity, clinginess, broken promises.",
+    "image": "court_flow_03_vanguard.png"
+  },
+  {
+    "id": "cups_page",
+    "name": "Page of Flow",
+    "suit": "Cups",
+    "value": "Page",
+    "keywords": ["wonder", "innocence", "new feelings", "intuition", "emotional message", "purity"],
+    "meaning_upright": "Be as a child. Wide eyed at the world, full of wonder. You do not yet know what lurks down dark alleys. What darkness occupies man's heart. But remember you are never alone. So long as you love and be loved, the world will take care of you.",
+    "meaning_reversed": "Immaturity, naivety, emotional immaturity, bad news, superficiality, emotional blocks.",
+    "image": "court_flow_04_signifer.png"
+  },
+  {
+    "id": "swords_king",
+    "name": "King of Glyphs",
+    "suit": "Swords",
+    "value": "King",
+    "keywords": ["intellect", "authority", "clarity", "justice", "logic", "precision"],
+    "meaning_upright": "Sometimes what is required is not brash boldness, but keen intellect. Let the raven move unseen through the shadows. Gather your intelligence. Move with precision.",
+    "meaning_reversed": "Tyranny, coldness, oppressive, judgmental, overly analytical, abusive power, rigidity.",
+    "image": "court_glyph_01_sovereign.png"
+  },
+  {
+    "id": "swords_queen",
+    "name": "Queen of Glyphs",
+    "suit": "Swords",
+    "value": "Queen",
+    "keywords": ["sharpness", "truth", "independence", "honesty", "insight", "refinement"],
+    "meaning_upright": "She does not wield emotion. She wields truth. The Consort of Glyph has felt deeply, but what she trusts now is insight. She cuts through illusion—not to harm, but to heal through honesty. When this card appears, speak clearly. Think sharply. Let no one confuse your kindness for softness. You are not unfeeling. You are refined.",
+    "meaning_reversed": "Cruelty, coldness, bitterness, emotional detachment, manipulation, lack of empathy, harshness.",
+    "image": "court_glyph_02_consort.png"
+  },
+  {
+    "id": "swords_knight",
+    "name": "Vanguard of Glyph",
+    "suit": "Swords",
+    "value": "Knight",
+    "keywords": ["ambition", "directness", "intellectual pursuit", "haste", "force", "decisiveness"],
+    "meaning_upright": "Fast-thinking, fast-speaking, and unfiltered, she is the embodiment of mental momentum. When this card appears, you’re being pushed to act decisively—but not thoughtlessly. Passion for truth can become recklessness. So ask yourself: Is this the right fight, or just the loudest? Direct your force. Don’t waste your edge.",
+    "meaning_reversed": "Aggression, impulsiveness, intellectual arrogance, bluntness, conflict, thoughtlessness, verbal attacks.",
+    "image": "court_glyph_03_vanguard.png"
+  },
+  {
+    "id": "swords_page",
+    "name": "Page of Glyphs",
+    "suit": "Swords",
+    "value": "Page",
+    "keywords": ["curiosity", "new ideas", "intellectual challenges", "truth-seeking", "learning", "alertness"],
+    "meaning_upright": "Inquisitive, alert, and always watching. Allow your intellect to roam. You’re learning. Let the blade sharpen with patience.",
+    "meaning_reversed": "Gossip, scattered thoughts, unreliability, immaturity, lack of focus, communication issues, mental blocks.",
+    "image": "court_glyph_04_signifer.png"
+  },
+  {
+    "id": "wands_01",
+    "name": "Ace of Flames",
+    "suit": "Wands",
+    "value": 1,
+    "keywords": ["new beginnings", "inspiration", "passion", "creativity", "raw energy", "action"],
+    "meaning_upright": "This is the first kiss of fire—the divine combustion before form. The Font of Flame is not a whisper, but a cry from the gut, a primal charge of creation unfiltered by doubt. It is eros and eruption, war cry and poem, the incandescent seed of becoming. Here, passion is holy. Rage is alchemical. You are not asked to tame it—you are asked to honor it. Let it move through you. Let it consume the false. You are not the smoke. You are the flame.",
+    "meaning_reversed": "Creative blocks, lack of inspiration, delays, feeling unmotivated, self-doubt, scattered energy.",
+    "image": "minor_flame_01_font.png"
+  },
+  {
+    "id": "wands_02",
+    "name": "Spark",
+    "suit": "Wands",
+    "value": 2,
+    "keywords": ["planning", "decisions", "future", "potential", "vision", "attraction"],
+    "meaning_upright": "Two forces meet, not yet fused but burning toward each other. This is desire in dynamic form—creative, sexual, psychic. Something wants to ignite, but choice remains. Move closer. Feel the tension. The flame does not beg—it beckons.",
+    "meaning_reversed": "Indecision, fear of unknown, lack of progress, feeling stuck, limited options, missed opportunities.",
+    "image": "minor_flame_02_spark.png"
+  },
+  {
+    "id": "wands_03",
+    "name": "Forge",
+    "suit": "Wands",
+    "value": 3,
+    "keywords": ["expansion", "collaboration", "realization", "growth", "forward movement", "building"],
+    "meaning_upright": "The fire has caught—now it must be shaped. This card marks the moment when inspiration becomes creation. You’ve set your intent, gathered your will—now build. Collaborate, refine, commit. The Forge doesn’t just burn—it hardens, melds, and prepares. The path ahead is forged by flame and determination.",
+    "meaning_reversed": "Setbacks, delays, lack of growth, creative blocks, internal conflict, broken agreements.",
+    "image": "minor_flame_03_forge.png"
+  },
+  {
+    "id": "wands_04",
+    "name": "Pillar",
+    "suit": "Wands",
+    "value": 4,
+    "keywords": ["celebration", "stability", "harmony", "homecoming", "achievement", "community"],
+    "meaning_upright": "The fire no longer flickers—it stands. This is the card of stability through passion, of joy anchored in purpose. A moment to pause, to honor progress, to mark sacred union or shared victory. What you’ve built is real. Let the flame warm others. Let yourself be seen.",
+    "meaning_reversed": "Instability, conflict, insecurity, unfulfilled joy, lack of celebration, feeling unrooted.",
+    "image": "minor_flame_04_pillar.png"
+  },
+  {
+    "id": "wands_05",
+    "name": "Clash",
+    "suit": "Wands",
+    "value": 5,
+    "keywords": ["conflict", "competition", "struggle", "disagreement", "creative tension", "challenge"],
+    "meaning_upright": "Passion unchecked becomes chaos. This card marks disruption—creative battles, ego collisions, raw heat without harmony. But even conflict is sacred if it brings clarity. Are you fighting to be right, or to be true? Let the fire strip illusion. What survives the clash is what was meant to burn.",
+    "meaning_reversed": "Avoidance of conflict, internal struggle, resolution, overwhelming conflict, dishonesty in competition.",
+    "image": "minor_flame_05_clash.png"
+  },
+  {
+    "id": "wands_06",
+    "name": "Glory",
+    "suit": "Wands",
+    "value": 6,
+    "keywords": ["victory", "recognition", "success", "progress", "public acclaim", "self-confidence"],
+    "meaning_upright": "Glory is recognition earned, victory in motion. The light around you is no accident; you’ve led, created, endured. Let the moment crown you. But know: true glory is not applause—it’s alignment with your fire. Walk proud. You are seen.",
+    "meaning_reversed": "Lack of recognition, defeat, arrogance, hubris, unearned success, self-doubt.",
+    "image": "minor_flame_06_glory.png"
+  },
+  {
+    "id": "wands_07",
+    "name": "Stand",
+    "suit": "Wands",
+    "value": 7,
+    "keywords": ["courage", "defense", "challenge", "perseverance", "standing firm", "proving ground"],
+    "meaning_upright": "This is the test of fire under pressure. You’ve claimed your place—now others may challenge it. But not all resistance is to be feared. Stand firm. Let your stance become statement. The flame that withstands the wind does not weaken—it sharpens. Hold fast. This is your proving ground.",
+    "meaning_reversed": "Giving up, feeling overwhelmed, lack of conviction, surrender, being outmaneuvered, exhaustion from battle.",
+    "image": "minor_flame_07_stand.png"
+  },
+  {
+    "id": "wands_08",
+    "name": "Surge",
+    "suit": "Wands",
+    "value": 8,
+    "keywords": ["speed", "action", "movement", "communication", "progress", "acceleration"],
+    "meaning_upright": "Everything is accelerating. What was still now streaks toward fruition. This is clarity in motion, signals received, messages sent, actions aligned. Don’t hesitate—ride the current. When fire surges, you either move with it or risk being left behind. Trust your aim. The air is clear. The way is open.",
+    "meaning_reversed": "Delays, stagnation, missed opportunities, hasty decisions, lack of communication, chaos, resistance to change.",
+    "image": "minor_flame_08_surge.png"
+  },
+  {
+    "id": "wands_09",
+    "name": "Keep",
+    "suit": "Wands",
+    "value": 9,
+    "keywords": ["resilience", "perseverance", "defense", "courage", "inner strength", "last stand"],
+    "meaning_upright": "You’ve come far, and the weight shows. Scars may linger, but the flame still burns. This card calls for perseverance—a final push, a last stand. You are not fragile. You are forged. Guard what matters. Tend the embers. The Keep holds because you do. Don’t give in now.",
+    "meaning_reversed": "Exhaustion, giving up, fear of failure, paranoia, unhealed wounds, feeling overwhelmed, weakness.",
+    "image": "minor_flame_09_keep.png"
+  },
+  {
+    "id": "wands_10",
+    "name": "Burden",
+    "suit": "Wands",
+    "value": 10,
+    "keywords": ["overburdened", "responsibility", "stress", "completion", "endings", "exhaustion"],
+    "meaning_upright": "The true price of sovereignty. This card speaks of exhaustion born from purpose—of carrying more than you must. Lay it down. Delegate. Rest. The fire should warm, not consume. Burnout is not sacrifice—it is forgetting that you, too, are sacred.",
+    "meaning_reversed": "Delegation, releasing burdens, burnout, inability to cope, taking on too much, overwhelming success.",
+    "image": "minor_flame_10_burden.png"
+  },
+  {
+    "id": "cups_01",
+    "name": "Ace of Flow",
+    "suit": "Cups",
+    "value": 1,
+    "keywords": ["new emotions", "love", "intuition", "connection", "emotional beginning", "wellspring"],
+    "meaning_upright": "A new current stirs. The Font of Flow signals the first ripple of feeling, connection, intuition. Vulnerability is not weakness—it is movement. Let it pour. Let it shape. What begins in the heart now seeks the world. This is not a trickle. It is a tide becoming.",
+    "meaning_reversed": "Blocked emotions, emotional emptiness, unrequited love, repressed feelings, heartbreak, self-pity.",
+    "image": "minor_flow_01_font.png"
+  },
+  {
+    "id": "cups_02",
+    "name": "Bond",
+    "suit": "Cups",
+    "value": 2,
+    "keywords": ["partnership", "union", "love", "connection", "mutual respect", "attraction"],
+    "meaning_upright": "This is the moment of mutual recognition—of hearts reaching, souls mirroring. Whether in love, friendship, or fate, something real is forming. Let it unfold. Flow is not forced; it follows feeling. Trust the current between you. It may shape something sacred.",
+    "meaning_reversed": "Broken bonds, discord, separation, imbalance, unhealthy relationships, mistrust.",
+    "image": "minor_flow_02_bond.png"
+  },
+  {
+    "id": "cups_03",
+    "name": "Merge",
+    "suit": "Cups",
+    "value": 3,
+    "keywords": ["celebration", "friendship", "community", "joy", "harmony", "collaboration"],
+    "meaning_upright": "When rivers meet, a greater current forms. Merge is the card of shared joy, emotional harmony, and communion. Let yourself be seen, let yourself celebrate. This moment is not solitary—it is made for dancing, toasting, loving. Connection deepens. Let it carry you.",
+    "meaning_reversed": "Overindulgence, gossip, isolation, misunderstanding, lack of celebration, superficiality.",
+    "image": "minor_flow_03_merge.png"
+  },
+  {
+    "id": "cups_04",
+    "name": "Drift",
+    "suit": "Cups",
+    "value": 4,
+    "keywords": ["apathy", "boredom", "discontent", "meditation", "re-evaluation", "stagnation"],
+    "meaning_upright": "The current slows. What once flowed now sits heavy. This is emotional pause—boredom, apathy, or detachment. But Drift is not punishment. It is a moment to reflect, to feel what’s missing. The tide will rise again. But first, ask: what are you refusing to feel?",
+    "meaning_reversed": "New opportunities, renewed interest, boredom, feeling stuck, self-pity, missed chances.",
+    "image": "minor_flow_04_drift.png"
+  },
+  {
+    "id": "cups_05",
+    "name": "Ache",
+    "suit": "Cups",
+    "value": 5,
+    "keywords": ["loss", "grief", "regret", "disappointment", "sorrow", "emotional pain"],
+    "meaning_upright": "Grief. Pain. Loss. These are emotions that numb the senses, wrest the joy right out of your heart. They are not signs of weakness, they are signs of strength. Embrace your ache. Look it in the eyes. Hold the ache in your heart knowing it is the reason you are alive.",
+    "meaning_reversed": "Acceptance, moving on, recovery, finding hope, dwelling on the past, overwhelming sadness.",
+    "image": "minor_flow_05_ache.png"
+  },
+  {
+    "id": "cups_06",
+    "name": "Charity",
+    "suit": "Cups",
+    "value": 6,
+    "keywords": ["nostalgia", "innocence", "childhood", "kindness", "giving", "receiving"],
+    "meaning_upright": "Charity is the open hand—compassion without ledger, kindness without condition. Whether giving or receiving, flow must remain unblocked. Let love circulate. Let generosity mend what logic cannot. There is no weakness in softness. The heart grows strongest when it is shared. What you offer now returns in kind.",
+    "meaning_reversed": "Clinging to the past, immaturity, regret, selfishness, unfulfilled desires, unequal giving/receiving.",
+    "image": "minor_flow_06_charity.png"
+  },
+  {
+    "id": "cups_07",
+    "name": "Seduction",
+    "suit": "Cups",
+    "value": 7,
+    "keywords": ["choices", "illusion", "fantasy", "temptation", "daydreaming", "wishful thinking"],
+    "meaning_upright": "Desire paints illusions, and now they glitter all around you. This is the realm of fantasy and temptation, where every option shimmers, yet few hold substance. Not all offerings are real. Not all choices are yours. Step back. Let the water still. What remains when the shimmer fades is truth.",
+    "meaning_reversed": "Clarity, choice paralysis, overwhelming options, hidden truths, addiction, unrealistic goals, indecision.",
+    "image": "minor_flow_07_seduction.png"
+  },
+  {
+    "id": "cups_08",
+    "name": "Release",
+    "suit": "Cups",
+    "value": 8,
+    "keywords": ["departure", "abandonment", "moving on", "seeking truth", "spiritual journey", "letting go"],
+    "meaning_upright": "You’ve outgrown what you once loved. This card marks the quiet heartbreak of departure—the decision to leave behind comfort in search of truth. There is no shame in release. It is the soul’s way of clearing the riverbed. Let go. The current will carry you forward.",
+    "meaning_reversed": "Stagnation, fear of change, attachment, avoiding commitment, unfulfilled journey, returning to old patterns.",
+    "image": "minor_flow_08_release.png"
+  },
+  {
+    "id": "cups_09",
+    "name": "Indulgence",
+    "suit": "Cups",
+    "value": 9,
+    "keywords": ["wish fulfillment", "satisfaction", "luxury", "gratitude", "pleasure", "abundance"],
+    "meaning_upright": "Pleasure has its place, and here it flows freely. Satisfaction, beauty, and emotional reward are yours—but indulgence tempts you to linger too long. What feeds the soul can also sedate it. Enjoy the moment, but stay alert. Fulfillment becomes stagnation when you forget to keep moving.",
+    "meaning_reversed": "Dissatisfaction, materialism, overindulgence, unfulfilled desires, gluttony, emotional emptiness.",
+    "image": "minor_flow_09_indulgence.png"
+  },
+  {
+    "id": "cups_10",
+    "name": "Acceptance",
+    "suit": "Cups",
+    "value": 10,
+    "keywords": ["harmony", "happiness", "fulfillment", "family", "wholeness", "emotional completion"],
+    "meaning_upright": "This is emotional fulfillment—not as a fleeting high, but as a deep and steady truth. You have touched something real, lasting, complete. Harmony within, harmony without. Accept it. Receive it. Let this be your new foundation. The river has returned home. Let it wash over everything.",
+    "meaning_reversed": "Broken family, emotional turmoil, shattered dreams, instability, sadness, feeling unaccepted.",
+    "image": "minor_flow_10_acceptance.png"
+  },
+  {
+    "id": "swords_01",
+    "name": "Ace of Glyphs",
+    "suit": "Swords",
+    "value": 1,
+    "keywords": ["new ideas", "clarity", "truth", "breakthrough", "mental power", "fresh perspective"],
+    "meaning_upright": "Here begins the language of power. The Ace of Glyphs is the first incision of meaning into the void—the sword that writes, the glyph that binds. What you declare now becomes law. Speak carefully. For in this moment, your voice is not suggestion—it is spell.",
+    "meaning_reversed": "Confusion, mental blocks, miscommunication, destructive thoughts, abuse of power, lack of clarity.",
+    "image": "minor_glyph_01_font.png"
+  },
+  {
+    "id": "swords_02",
+    "name": "Peace",
+    "suit": "Swords",
+    "value": 2,
+    "keywords": ["balance", "truce", "indecision", "stalled thoughts", "choice", "meditation"],
+    "meaning_upright": "This is the silent clarity between decisions, the sacred pause before movement. Peace is not the absence of action—it is the alignment of intention. Two forces, two paths, suspended in balance. Do not rush the choice. Let the mind quiet. The glyph will write itself when the hand is steady.",
+    "meaning_reversed": "Stalemate, hidden truths, internal conflict, unresolved issues, overwhelming choices, disequilibrium.",
+    "image": "minor_glyph_02_peace.png"
+  },
+  {
+    "id": "swords_03",
+    "name": "Pierce",
+    "suit": "Swords",
+    "value": 3,
+    "keywords": ["heartbreak", "pain", "betrayal", "truth", "grief", "revelation"],
+    "meaning_upright": "This is the glyph of pain and precision. A truth you can no longer deny, a revelation that leaves its mark. Pierce does not arrive to harm, but to cut away the lie. Grief, betrayal, awakening—each may follow. But take heart: the wound is where wisdom enters.",
+    "meaning_reversed": "Healing, recovery, acceptance, truth avoided, emotional suppression, prolonged pain, reconciliation.",
+    "image": "minor_glyph_03_pierce.png"
+  },
+  {
+    "id": "swords_04",
+    "name": "Repose",
+    "suit": "Swords",
+    "value": 4,
+    "keywords": ["rest", "recovery", "contemplation", "meditation", "retreat", "pause"],
+    "meaning_upright": "You’ve spoken, you’ve pierced—and now, you rest. Repose is the glyph of integration, the stillness that follows insight. It is not idleness, but a sacred pause. The intellect is a sword, but even blades must be sheathed. Let thought soften. Let silence speak. Your next truth will come in dreams.",
+    "meaning_reversed": "Restlessness, exhaustion, stagnation, fear of rest, re-entering conflict, mental blockages.",
+    "image": "minor_glyph_04_repose.png"
+  },
+  {
+    "id": "swords_05",
+    "name": "Breach",
+    "suit": "Swords",
+    "value": 5,
+    "keywords": ["conflict", "defeat", "dishonor", "betrayal", "disagreement", "sabotage"],
+    "meaning_upright": "Conflict has entered the field—ideas turned sharp, words turned cold. Breach marks betrayal, miscommunication, or inner sabotage. You may have spoken too soon… or not soon enough. But all is not lost. The break reveals what was unstable. Gather your thoughts. Choose your next move with precision.",
+    "meaning_reversed": "Resolution, moving on, reconciliation, inner peace, overwhelming defeat, unacknowledged loss.",
+    "image": "minor_glyph_05_breach.png"
+  },
+  {
+    "id": "swords_06",
+    "name": "Passage",
+    "suit": "Swords",
+    "value": 6,
+    "keywords": ["transition", "moving on", "journey", "escape", "seeking peace", "healing"],
+    "meaning_upright": "The storm is fading. Now, the mind seeks calmer shores. Passage marks the transition from mental turmoil to clarity—from disruption to integration. Let old patterns dissolve. Take only what serves your journey. The glyphs ahead are unwritten. You are no longer escaping—you are choosing peace.",
+    "meaning_reversed": "Stuck in the past, resistance to change, unfinished business, emotional baggage, fear of new beginnings.",
+    "image": "minor_glyph_06_passage.png"
+  },
+  {
+    "id": "swords_07",
+    "name": "Stealth",
+    "suit": "Swords",
+    "value": 7,
+    "keywords": ["deception", "strategy", "secrets", "cunning", "hidden motives", "manipulation"],
+    "meaning_upright": "Not all truths are spoken. Stealth moves through shadow—strategy over force, cunning over confrontation. This card warns of secrets, misdirection, or unseen agendas—yours or another’s. Move carefully. The mind is a maze, but even in the dark, you can find your way. Just don’t forget what you’re hiding from.",
+    "meaning_reversed": "Confession, honesty, exposure, coming clean, hidden weaknesses, manipulation backfiring.",
+    "image": "minor_glyph_07_stealth.png"
+  },
+  {
+    "id": "swords_08",
+    "name": "Bind",
+    "suit": "Swords",
+    "value": 8,
+    "keywords": ["restriction", "self-imposed limitation", "paralysis", "overthinking", "imprisonment", "fear"],
+    "meaning_upright": "The mind has looped back on itself—overthinking, overanalyzing, paralyzed by its own logic. Bind is not a trap laid by others; it’s a glyph you wrote yourself. But what is written can be rewritten. The key is not outside you. Loosen your grip. The knot will fall away.",
+    "meaning_reversed": "Breaking free, new perspectives, self-liberation, clarity, overcoming obstacles, releasing fear.",
+    "image": "minor_glyph_08_bind.png"
+  },
+  {
+    "id": "swords_09",
+    "name": "Spiral",
+    "suit": "Swords",
+    "value": 9,
+    "keywords": ["anxiety", "worry", "nightmares", "despair", "mental anguish", "fear"],
+    "meaning_upright": "Thoughts circle tighter, darker. The Spiral pulls inward, not outward—a collapse of clarity into dread. Anxiety, insomnia, shadow-thoughts on repeat. But even this descent has wisdom. The Spiral is a portal. Face what loops within you. Only by entering the maze can you find the center—and the way out.",
+    "meaning_reversed": "Hope, release from fear, confronting anxiety, recovery, finding inner peace, seeking help.",
+    "image": "minor_glyph_09_spiral.png"
+  },
+  {
+    "id": "swords_10",
+    "name": "Worldfall",
+    "suit": "Swords",
+    "value": 10,
+    "keywords": ["ruin", "collapse", "ending", "burnout", "transformation", "catastrophe"],
+    "meaning_upright": "This is the breaking point—the burden of intellect, the collapse of every structure once trusted. Worldfall is overload, burnout, existential exhaustion. But endings are glyphs too. Let the old constructs fall. What shatters now clears the page. From ruin, the Architect awakens. You are not the world. You are its rewriter.",
+    "meaning_reversed": "Recovery, regeneration, new beginnings, unavoidable ending, surviving a disaster, hope after ruin.",
+    "image": "minor_glyph_10_worldfall.png"
+  },
+  {
+    "id": "pentacles_01",
+    "name": "Ace of Eden",
+    "suit": "Pentacles",
+    "value": 1,
+    "keywords": ["new opportunities", "material beginnings", "prosperity", "security", "manifestation", "health"],
+    "meaning_upright": "This is the first breath of matter, the pulse of incarnation. The Font of Core grounds spirit into substance. It is the seed of health, labor, and material creation. Begin with your body. Begin with the earth. What you touch now will shape what lasts. Build wisely.",
+    "meaning_reversed": "Missed opportunities, financial instability, lack of grounding, poor health, material delays, insecurity.",
+    "image": "minor_core_01_font.png"
+  },
+  {
+    "id": "pentacles_02",
+    "name": "Harmony",
+    "suit": "Pentacles",
+    "value": 2,
+    "keywords": ["balance", "flexibility", "juggling", "adaptation", "duality", "resourcefulness"],
+    "meaning_upright": "Two forces meet—not in conflict, but in rhythm. Harmony is the dance of effort and ease, of motion grounded in equilibrium. Your time, energy, and resources seek alignment. Don’t juggle—flow. When the inner core is steady, the outer world finds its pulse. Move with balance. Build with grace.",
+    "meaning_reversed": "Imbalance, disorganization, poor financial decisions, overwhelm, difficulty adapting, feeling unstable.",
+    "image": "minor_core_02_harmony.png"
+  },
+  {
+    "id": "pentacles_03",
+    "name": "Craft",
+    "suit": "Pentacles",
+    "value": 3,
+    "keywords": ["collaboration", "skill", "mastery", "learning", "teamwork", "building"],
+    "meaning_upright": "Craft is the sacred art of building with intention. Your effort shapes more than outcomes—it shapes you. This card honors collaboration, mastery, and the quiet devotion behind lasting work. Choose your tools. Refine your method. What you make now becomes your offering to the world.",
+    "meaning_reversed": "Lack of skill, uninspired work, poor teamwork, shoddy craftsmanship, amateur efforts, recognition issues.",
+    "image": "minor_core_03_craft.png"
+  },
+  {
+    "id": "pentacles_04",
+    "name": "Vault",
+    "suit": "Pentacles",
+    "value": 4,
+    "keywords": ["security", "stability", "hoarding", "possessiveness", "control", "conservatism"],
+    "meaning_upright": "You’ve built something worth guarding. Vault is the card of material stability, grounded boundaries, and earned rest. But protection can become isolation. Are you keeping treasures safe—or keeping yourself sealed? Reflect on what you’ve stored. What must be preserved… and what is waiting to be opened?",
+    "meaning_reversed": "Stinginess, financial insecurity, fear of loss, rigidity, release of control, overspending, greed.",
+    "image": "minor_core_04_vault.png"
+  },
+  {
+    "id": "pentacles_05",
+    "name": "Rupture",
+    "suit": "Pentacles",
+    "value": 5,
+    "keywords": ["loss", "hardship", "poverty", "crisis", "isolation", "suffering"],
+    "meaning_upright": "Something has cracked—within the body, the bond, or the structure you trusted. But pain is not the end. It is the signal. Tend to what’s broken, not with fear, but with care. What heals here may grow stronger than before.",
+    "meaning_reversed": "Recovery, overcoming hardship, spiritual poverty, feeling outcast, finding help, financial stability.",
+    "image": "minor_core_05_fracture.png"
+  },
+  {
+    "id": "pentacles_06",
+    "name": "Boon",
+    "suit": "Pentacles",
+    "value": 6,
+    "keywords": ["generosity", "charity", "giving", "receiving", "fairness", "support"],
+    "meaning_upright": "Boon marks a moment of material blessing—support received, resources returned, or generosity exchanged. But a gift is more than a thing—it’s a signal. The universe acknowledges your effort. Can you receive without guilt? Can you give without expectation? Wealth flows where gratitude lives. Accept the offering. Pass it on.",
+    "meaning_reversed": "Selfishness, debt, exploitation, unfairness, conditional giving, lack of charity, greed.",
+    "image": "minor_core_06_boon.png"
+  },
+  {
+    "id": "pentacles_07",
+    "name": "Yield",
+    "suit": "Pentacles",
+    "value": 7,
+    "keywords": ["patience", "investment", "evaluation", "waiting", "harvest", "perseverance"],
+    "meaning_upright": "You’ve planted, you’ve tended—now you wait. Yield is not stagnation; it is the sacred pause before reward. This card reminds you: not all growth is visible. Do not rush the process. Evaluate, adjust, trust the unfolding. What you seek is ripening. The ground will offer its fruit in time.",
+    "meaning_reversed": "Poor investment, impatience, lack of progress, wasted effort, disillusionment, quick gains.",
+    "image": "minor_core_07_yield.png"
+  },
+  {
+    "id": "pentacles_08",
+    "name": "Refine",
+    "suit": "Pentacles",
+    "value": 8,
+    "keywords": ["mastery", "diligence", "craftsmanship", "focus", "dedication", "skill"],
+    "meaning_upright": "Refine is the card of mastery in motion. Not grand gestures, but patient repetition—sharpening, smoothing, aligning with excellence. This is where effort becomes art. The work is not finished, but neither are you. Honor the process. What you shape now shapes you in return. Keep honing. You're almost there.",
+    "meaning_reversed": "Perfectionism, lack of focus, shoddy work, ambition without skill, procrastination, learning plateaus.",
+    "image": "minor_core_08_refine.png"
+  },
+  {
+    "id": "pentacles_09",
+    "name": "Thrive",
+    "suit": "Pentacles",
+    "value": 9,
+    "keywords": ["abundance", "independence", "luxury", "self-sufficiency", "gratitude", "comfort"],
+    "meaning_upright": "Thrive is the arrival—the garden in full flower, the result of labor meeting time. This is material comfort, independence, grounded joy. But don’t forget: it came from your care. Appreciate the beauty you’ve built. Bask in it. And remember… thriving is not selfish. It’s a sacred example.",
+    "meaning_reversed": "Loss, financial insecurity, over-reliance on others, shattered dreams, materialism, loneliness, hidden debts.",
+    "image": "minor_core_09_thrive.png"
+  },
+  {
+    "id": "pentacles_10",
+    "name": "Legacy",
+    "suit": "Pentacles",
+    "value": 10,
+    "keywords": ["completion", "inheritance", "family", "wealth", "security", "legacy"],
+    "meaning_upright": "This is the culmination—not just of effort, but of meaning. Legacy asks: What are you building that will outlive you? What wisdom are you leaving behind? The material world bends to time, but truth echoes. Let your work be more than gain—let it be gift. Plant something eternal.",
+    "meaning_reversed": "Family discord, financial ruin, instability, hidden secrets, loss of inheritance, breakdown of family ties.",
+    "image": "minor_core_10_legacy.png"
+  }
+]

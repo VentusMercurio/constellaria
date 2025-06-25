@@ -23,6 +23,12 @@ class BirthData(BaseModel):
     longitude: float
     timezone: str
 
+class TarotInterpretationRequest(BaseModel):
+    card_name: str
+    card_meaning_upright: str
+    user_sun_sign: str
+
+
 # --- FastAPI Application Setup ---
 app = FastAPI()
 
@@ -49,6 +55,35 @@ def format_astro_point(planet_object):
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the Constellaria Celestial Engine"}
+
+# NEW: Daily Tarot Interpretation Endpoint
+@app.post("/interpret-tarot")
+async def interpret_tarot(request: TarotInterpretationRequest):
+    try:
+        prompt = f"""You are a mystical guide for an astrology app.
+        The user's sun sign is {request.user_sun_sign}.
+        The tarot card drawn is "${request.card_name}".
+        Its upright meaning is: "${request.card_meaning_upright}".
+
+        Provide a concise (2-3 sentences), insightful, and encouraging daily interpretation that blends the card's meaning with the general characteristics of a {request.user_sun_sign} individual.
+        Start directly with the interpretation, without phrases like "Your card today is...".
+        """
+
+        chat_completion = client.chat.completions.create(
+            messages=[{"role": "user", "content": prompt}],
+            model='gpt-3.5-turbo', # Or 'gpt-4o' if you prefer
+            max_tokens=150,
+        )
+
+        interpretation = chat_completion.choices[0].message.content
+        if not interpretation:
+            raise ValueError("OpenAI returned no interpretation content.")
+
+        return {"interpretation": interpretation}
+
+    except Exception as e:
+        traceback.print_exc() # Print full traceback for debugging
+        raise HTTPException(status_code=500, detail=f"Failed to generate tarot interpretation: {str(e)}")
 
 @app.post("/calculate-chart")
 def calculate_natal_chart(data: BirthData):

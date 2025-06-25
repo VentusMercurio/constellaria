@@ -24,6 +24,15 @@ export interface NatalChartDetails {
   // aspects?: Aspect[]; // Example if you add aspects later
 }
 
+// New interface for the joined user profile and auth.users data
+export interface UserProfileWithEmail {
+  id: string;
+  sun_sign: string;
+  users: {
+    email: string | null;
+  } | null; // This represents the joined 'users' object, which can be null if no email is linked
+}
+
 // If you have other specific types, like for aspects, you'd define them here too
 // export interface Aspect {
 //   planet1: string;
