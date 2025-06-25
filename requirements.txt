@@ -2,3 +2,5 @@ fastapi
 kerykeion
 uvicorn
 pytz
+openai
+python-dotenv
