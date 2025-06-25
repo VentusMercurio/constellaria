@@ -6,8 +6,14 @@ import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
 
+// Import the new components
+import ChartWheel from '@/components/ChartWheel';
+import PlanetList from '@/components/PlanetList';
+// Import types from the new central file
+import { NatalChartDetails } from '@/types/astrology'; // Adjust path if needed
+
 export default function MyNatalChartPage() {
-  const [chartData, setChartData] = useState<any | null>(null);
+  const [chartData, setChartData] = useState<NatalChartDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -18,15 +24,13 @@ export default function MyNatalChartPage() {
       const { data: { user } } = await supabase.auth.getUser();
 
       if (!user) {
-        // If no user, redirect to login.
         router.push('/auth/login');
         return;
       }
 
-      // Fetch the profile for the authenticated user
       const { data: profile, error: fetchError } = await supabase
         .from('profiles')
-        .select('chart_data') // Only select the chart_data column
+        .select('chart_data')
         .eq('id', user.id)
         .single();
 
@@ -34,12 +38,9 @@ export default function MyNatalChartPage() {
         console.error('Error fetching natal chart:', fetchError);
         setError('Could not retrieve your natal chart. Please try again.');
       } else if (profile && profile.chart_data) {
-        setChartData(profile.chart_data);
+        setChartData(profile.chart_data as NatalChartDetails); // Cast to NatalChartDetails
       } else {
-        // Handle case where profile exists but chart_data is missing, or profile doesn't exist
         setError('No natal chart found. Please generate your chart first.');
-        // Optionally, redirect them to the onboarding page if no chart data
-        // router.push('/onboarding/natal-chart');
       }
       setIsLoading(false);
     };
@@ -65,20 +66,23 @@ export default function MyNatalChartPage() {
         )}
 
         {chartData ? (
-          <div className="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 text-left">
-            <h2 className="font-serif text-2xl text-amber-400 mb-4">Planetary Positions:</h2>
-            {/* Displaying raw JSON for now, you can format this more beautifully later */}
-            <pre className="whitespace-pre-wrap break-words text-gray-300 text-sm overflow-auto max-h-[60vh]">
-              {JSON.stringify(chartData, null, 2)}
-            </pre>
-            {/* You can iterate over chartData.planets to display them */}
-            {/* Example:
-            {chartData.planets?.map((planet: any) => (
-              <p key={planet.name} className="text-lg text-gray-200">
-                <span className="font-bold">{planet.name}</span> in <span className="italic">{planet.sign}</span> at {planet.degree}°
-              </p>
-            ))}
-            */}
+          <div className="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 text-left space-y-8 flex flex-col md:flex-row md:space-x-8 md:space-y-0 items-center justify-center">
+            {/* Chart Wheel */}
+            <div className="md:w-1/2 flex justify-center">
+                <ChartWheel chartData={chartData} size={400} />
+            </div>
+
+            {/* Planet List (and potentially Birth Details) */}
+            <div className="md:w-1/2 space-y-8">
+              {/* Add BirthDetailsCard here if you have it and want it displayed */}
+              {/* <BirthDetailsCard
+                birthDateTimeUTC={chartData.birthDateTimeUTC}
+                latitude={chartData.latitude}
+                longitude={chartData.longitude}
+                timezone="UTC" // Make sure you pass the correct timezone if available in chartData
+              /> */}
+              <PlanetList planets={chartData.planets} />
+            </div>
           </div>
         ) : (
           !error && <p className="text-gray-400">Your natal chart data is not available.</p>

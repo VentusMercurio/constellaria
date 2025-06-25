@@ -1,3 +1,4 @@
+// src/app/onboarding/natal-chart/page.tsx
 'use client';
 
 import { useState } from 'react';
@@ -6,27 +7,10 @@ import BirthDetailsCard from '@/components/BirthDetailsCard';
 import PlanetList from '@/components/PlanetList';
 import ChartWheel from '@/components/ChartWheel';
 import { createClient } from '@/lib/supabase/client';
+// Import types from the new central file
+import { AstrologicalPoint, NatalChartDetails } from '@/types/astrology'; // Adjust path if needed
 
-// --- Data Types (for type safety) ---
-interface AstrologicalPoint {
-  name: string;
-  longitude: number;
-  sign: string;
-  degreeInSign: number;
-  formattedPosition: string;
-  house?: number;
-  isRetrograde?: boolean;
-}
-
-interface NatalChartDetails {
-  birthDateTimeUTC: string;
-  latitude: number;
-  longitude: number;
-  ascendant: AstrologicalPoint;
-  midheaven: AstrologicalPoint;
-  houseCusps: AstrologicalPoint[];
-  planets: AstrologicalPoint[];
-}
+// --- NO NEED TO REDEFINE INTERFACES HERE ANYMORE ---
 
 // --- Display Component ---
 function ChartDisplay({ chartData, timezone, onContinue }: { chartData: NatalChartDetails, timezone: string, onContinue: () => void }) {
@@ -45,13 +29,13 @@ function ChartDisplay({ chartData, timezone, onContinue }: { chartData: NatalCha
         <ChartWheel chartData={chartData} size={300} />
       </div>
 
-      <BirthDetailsCard 
+      <BirthDetailsCard
         birthDateTimeUTC={chartData.birthDateTimeUTC}
         latitude={chartData.latitude}
         longitude={chartData.longitude}
         timezone={timezone}
       />
-      
+
       <PlanetList planets={chartData.planets} />
 
       <div className="pt-4">
@@ -104,7 +88,6 @@ export default function NatalChartPage() {
     }
   };
 
-  // --- THIS IS THE CORRECTED handleSubmit FUNCTION ---
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!latitude || !longitude || !timezone) {
@@ -121,10 +104,17 @@ export default function NatalChartPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ birthDate, birthTime, latitude, longitude, timezone }),
       });
-      const resultData = await response.json();
+
+      // Check if the response was NOT OK first
       if (!response.ok) {
-        throw new Error(resultData.error || 'An error occurred during chart calculation.');
+        // If not ok, parse it as an error object
+        const errorData = await response.json();
+        // The error object is expected to have an 'error' property
+        throw new Error(errorData.error || 'An unknown error occurred during chart calculation.');
       }
+
+      // If the response IS OK, then parse it as NatalChartDetails
+      const resultData: NatalChartDetails = await response.json();
       
       // 2. Save the data to Supabase
       const supabase = createClient();
@@ -142,7 +132,7 @@ export default function NatalChartPage() {
       const { error: upsertError } = await supabase.from('profiles').upsert(profileData);
       if (upsertError) throw upsertError;
 
-      // 3. THIS IS THE FIX: Set the state to display the results on THIS page
+      // 3. Set the state to display the results on THIS page
       setChartData(resultData);
 
     } catch (err: any) {
@@ -152,15 +142,12 @@ export default function NatalChartPage() {
       setIsLoading(false);
     }
   };
-  
   const handleContinue = () => {
-    // This function is now only used by the button on the results display
     router.push('/dashboard');
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-900">
-      {/* This conditional rendering will now work correctly */}
       {chartData && timezone ? (
         <ChartDisplay chartData={chartData} timezone={timezone} onContinue={handleContinue} />
       ) : (
@@ -172,7 +159,6 @@ export default function NatalChartPage() {
               To reveal your chart, Sophia needs to know when and where your journey began.
             </p>
             <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-2xl shadow-xl space-y-4">
-              {/* Form inputs remain the same */}
               <input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-fuchsia-500" />
               <input type="time" value={birthTime} onChange={(e) => setBirthTime(e.target.value)} required className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-fuchsia-500" />
               <div className="pt-4 space-y-2">

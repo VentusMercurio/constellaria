@@ -1,60 +1,46 @@
-// This component contains all logic and data, so it has no external imports.
+// src/components/PlanetList.tsx
+import React from 'react';
+// Import types from the new central file
+import { AstrologicalPoint } from '@/types/astrology'; // Adjust path if needed
 
-// --- Data is now directly inside the component ---
-const PLANET_GLYPHS: { [key: string]: string } = {
-  "Sun": "☉", "Moon": "☽", "Mercury": "☿", "Venus": "♀", "Mars": "♂",
-  "Jupiter": "♃", "Saturn": "♄", "Uranus": "♅", "Neptune": "♆", "Pluto": "♇",
-};
-
-const PLANET_COLORS: { [key: string]: string } = {
-  "Sun": "#FFCA28", "Moon": "#B0BEC5", "Mercury": "#FFA726", "Venus": "#F06292",
-  "Mars": "#EF5350", "Jupiter": "#42A5F5", "Saturn": "#8D6E63", "Uranus": "#26C6DA",
-  "Neptune": "#29B6F6", "Pluto": "#7E57C2",
-};
-
-// --- Interfaces are also defined here ---
-interface AstrologicalPoint {
-  name: string;
-  formattedPosition: string;
-  house?: number;
-  isRetrograde?: boolean;
-}
+// --- NO NEED TO REDEFINE INTERFACE HERE ANYMORE ---
 
 interface PlanetListProps {
   planets: AstrologicalPoint[];
 }
 
-// --- The Main Component ---
-export default function PlanetList({ planets }: PlanetListProps) {
-  return (
-    <div className="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700">
-      <h2 className="text-center font-serif text-2xl text-fuchsia-400 mb-4">
-        Planets
-      </h2>
-      <div className="space-y-1">
-        {/* We map over the planets and render each one directly */}
-        {planets.map((planet) => {
-          const glyph = PLANET_GLYPHS[planet.name] || '•';
-          const color = PLANET_COLORS[planet.name] || '#FFFFFF';
+// Helper to format house names (can be moved to a common utility)
+function formatHouseName(house: string | null | undefined): string {
+  if (!house) return '';
+  const parts = house.split('_');
+  if (parts.length < 2) return house;
+  const houseNumber = parts[0];
+  const suffixMap: { [key: string]: string } = {
+    'First': '1st', 'Second': '2nd', 'Third': '3rd', 'Fourth': '4th', 'Fifth': '5th',
+    'Sixth': '6th', 'Seventh': '7th', 'Eighth': '8th', 'Ninth': '9th', 'Tenth': '10th',
+    'Eleventh': '11th', 'Twelfth': '12th'
+  };
+  return `${suffixMap[houseNumber] || houseNumber} ${parts[1]}`;
+}
 
-          return (
-            <div key={planet.name} className="flex items-center py-2">
-              <span className="w-6 text-xl" style={{ color: color }}>
-                {glyph}
-              </span>
-              <div className="flex-grow text-gray-300">
-                <span className="font-bold">{planet.name}:</span> {planet.formattedPosition}
-                {planet.house && (
-                  <span className="ml-2 text-sm text-gray-500">(H{planet.house})</span>
-                )}
-              </div>
-              {planet.isRetrograde && (
-                <span className="text-sm font-bold text-red-500">Rx</span>
-              )}
-            </div>
-          );
-        })}
+
+const PlanetList: React.FC<PlanetListProps> = ({ planets }) => {
+  return (
+    <div className="bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-700 text-left">
+      <h2 className="font-serif text-2xl text-amber-400 mb-4">Planetary Positions</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 text-gray-300">
+        {planets.map((planet) => (
+          <div key={planet.name} className="flex items-center space-x-2">
+            <span className="font-bold w-24 text-lg text-fuchsia-300">{planet.name}:</span>
+            <span className="flex-1 text-lg">
+              {planet.formattedPosition} {planet.isRetrograde ? <span className="text-red-400">(R)</span> : ''}
+              {planet.house && ` in ${formatHouseName(planet.house)}`}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
-}
+};
+
+export default PlanetList;
