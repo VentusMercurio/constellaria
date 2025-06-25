@@ -77,9 +77,15 @@ def calculate_natal_chart(data: BirthData):
         ascendant_data = format_astro_point(subject.ascendant)
         midheaven_data = format_astro_point(subject.medium_coeli)
         natal_chart_details = {
-            "ascendant": ascendant_data, "midheaven": midheaven_data,
-            "houseCusps": house_cusps_data, "planets": planets_data
-        }
+            # --- THESE ARE THE MISSING LINES ---
+            "birthDateTimeUTC": aware_dt.astimezone(pytz.utc).isoformat(),
+            "latitude": data.latitude,
+            "longitude": data.longitude,
+            # --- END OF MISSING LINES ---
+            "ascendant": ascendant_data,
+            "midheaven": midheaven_data,
+            "houseCusps": house_cusps_data,
+            "planets": planets_data,        }
         return natal_chart_details
     except Exception as e:
         traceback.print_exc()
