@@ -117,7 +117,7 @@ export default function DashboardPage() {
           <DashboardCard 
             title="My Natal Chart"
             description="Explore the cosmic blueprint of your soul's journey."
-            link="/onboarding/natal-chart"
+            link="/my-chart"
             buttonText="View My Chart"
           />
           {/* Using our new interactive card */}
