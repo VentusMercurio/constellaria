@@ -33,6 +33,16 @@ export interface UserProfileWithEmail {
   } | null; // This represents the joined 'users' object, which can be null if no email is linked
 }
 
+// Updated interface for the joined user profile and auth.users data via the view
+export interface UserProfileWithEmail {
+  id: string;
+  sun_sign: string;
+  // Change 'users' to 'auth_users_emails_view' to match the view's name
+  auth_users_emails_view: {
+    email: string | null;
+  } | null;
+}
+
 // If you have other specific types, like for aspects, you'd define them here too
 // export interface Aspect {
 //   planet1: string;
