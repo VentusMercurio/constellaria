@@ -27,8 +27,15 @@ export default function RegisterPage() {
     const { error } = await supabase.auth.signUp({
       email,
       password,
+            options: {
+        // This is the URL Supabase will redirect the user to AFTER they click the email verification link
+        // Use APP_URL from your environment variables to make this dynamic for local/production
+        emailRedirectTo: `${process.env.APP_URL}/onboarding/welcome`,
+      },
     });
 
+
+    
     if (error) {
       setError(error.message);
     } else {
