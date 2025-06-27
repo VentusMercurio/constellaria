@@ -85,7 +85,7 @@ export async function GET() {
     // --- END DEBUG LOG ---
 
 
-        const interpretationResponse = await fetch(`${process.env.APP_URL}/api/interpret-tarot`, {
+        const interpretationResponse = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/interpret-tarot`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -111,7 +111,7 @@ export async function GET() {
               A new cosmic message is ready for you in Constellaria.
             </p>
             <div style="text-align: center; margin-top: 20px;">
-              <a href="${process.env.APP_URL}/daily-draw" style="display: inline-block; padding: 12px 24px; background-color: #ec4899; color: #ffffff; text-decoration: none; border-radius: 9999px; font-weight: bold;">
+              <a href="${process.env.NEXT_PUBLIC_APP_URL}/daily-draw" style="display: inline-block; padding: 12px 24px; background-color: #ec4899; color: #ffffff; text-decoration: none; border-radius: 9999px; font-weight: bold;">
                 Draw Your Card Now
               </a>
             </div>
