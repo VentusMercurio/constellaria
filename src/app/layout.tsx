@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${cormorantGaramond.variable} bg-gray-900 text-white font-sans`}>
+      <body className={`${inter.variable} ${cormorantGaramond.variable} text-white font-sans`}>
         {children}
       </body>
     </html>
