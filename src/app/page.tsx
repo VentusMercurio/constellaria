@@ -31,8 +31,7 @@ export default function LandingPage() {
             Constellaria
           </h1>        
           <p className="font-sans text-lg md:text-xl text-gray-300 mb-8">
-            Welcome, Seeker. Discover the wisdom of the cosmos, personalized for you.
-            Sophia, your oracle, awaits to bridge the gap between the stars and your story.
+            Welcome, Seeker. Sophia has been waiting for you.
           </p>
 
           <div className="shiny-button inline-block">
