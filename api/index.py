@@ -10,15 +10,15 @@ from pydantic import BaseModel
 from openai import OpenAI
 from dotenv import load_dotenv, find_dotenv
 from kerykeion import AstrologicalSubject
-import json # Ensure json is imported for pretty printing (if you want to keep that print)
+import json # Make sure json is imported for pretty printing (if you want to keep that print)
 
 # Load environment variables from .env.local
 load_dotenv(find_dotenv(filename=".env.local"))
 
 # Initialize the OpenAI Client
-client = OpenAI()
+client = OpenAI() # Using 'client' as the variable name
 
-# --- Pydantic Models (KEEP EXISTING) ---
+# --- Pydantic Models ---
 class BirthData(BaseModel):
     birthDate: str
     birthTime: str
@@ -31,7 +31,7 @@ class TarotInterpretationRequest(BaseModel):
     card_meaning_upright: str
     user_sun_sign: str
 
-# --- FastAPI Application Setup (KEEP EXISTING) ---
+# --- FastAPI Application Setup ---
 app = FastAPI()
 
 app.add_middleware(
@@ -42,7 +42,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- Helper Function (KEEP EXISTING) ---
+# --- Helper Function ---
 def format_astro_point(planet_object):
     degree_in_sign = planet_object.position % 30
     return {
@@ -53,28 +53,100 @@ def format_astro_point(planet_object):
         "isRetrograde": getattr(planet_object, 'retrograde', False),
     }
 
-# --- API Endpoints (KEEP EXISTING) ---
+# --- API Endpoints ---
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the Constellaria Celestial Engine"}
 
+# --- RESTORED LOGIC FOR /interpret-tarot ---
 @app.post("/interpret-tarot")
 async def interpret_tarot(request: TarotInterpretationRequest):
-    # ... (your existing interpret_tarot logic) ...
-    pass
+    try:
+        prompt = f"""You are a mystical guide for an astrology app.
+        The user's sun sign is {request.user_sun_sign}.
+        The tarot card drawn is "${request.card_name}".
+        Its upright meaning is: "${request.card_meaning_upright}".
+
+        Provide a concise (2-3 sentences), insightful, and encouraging daily interpretation that blends the card's meaning with the general characteristics of a {request.user_sun_sign} individual.
+        Start directly with the interpretation, without phrases like "Your card today is...".
+        """
+        # (Optional Debug Prints for Tarot)
+        # print("\n--- OpenAI Tarot Prompt ---")
+        # print(prompt)
+        # print("---------------------------\n")
+
+        chat_completion = client.chat.completions.create( # Use 'client' as defined globally
+            messages=[{"role": "user", "content": prompt}],
+            model='gpt-3.5-turbo', # Or 'gpt-4o' if you prefer
+            max_tokens=150,
+        )
+
+        interpretation = chat_completion.choices[0].message.content
+        
+        # (Optional Debug Prints for Tarot)
+        # print("\n--- OpenAI Raw Tarot Completion Response ---")
+        # print(chat_completion)
+        # print("-------------------------------------------\n")
+        # print(f"Interpretation content: '{interpretation}'")
+
+        if not interpretation:
+            raise ValueError("OpenAI returned no interpretation content.")
+
+        return {"interpretation": interpretation}
+
+    except Exception as e:
+        traceback.print_exc()
+        # (Optional Debug Print for Error)
+        # print(f"Error in /interpret-tarot Python endpoint: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to generate tarot interpretation: {str(e)}")
+# --- END RESTORED LOGIC FOR /interpret-tarot ---
 
 @app.post("/calculate-chart")
 def calculate_natal_chart(data: BirthData):
-    # ... (your existing calculate_natal_chart logic) ...
-    pass
+    try:
+        tz = pytz.timezone(data.timezone)
+        dt_str = f"{data.birthDate} {data.birthTime}"
+        local_dt = datetime.strptime(dt_str, "%Y-%m-%d %H:%M")
+        aware_dt = tz.localize(local_dt)
+        subject = AstrologicalSubject(
+            name="Seeker", year=aware_dt.year, month=aware_dt.month, day=aware_dt.day,
+            hour=aware_dt.hour, minute=aware_dt.minute, lat=data.latitude,
+            lng=data.longitude, tz_str=data.timezone
+        )
+        planets_to_process = [
+            subject.sun, subject.moon, subject.mercury, subject.venus, subject.mars,
+            subject.jupiter, subject.saturn, subject.uranus, subject.neptune, subject.pluto
+        ]
+        planets_data = [format_astro_point(p) for p in planets_to_process]
+        houses_to_process = [
+            subject.first_house, subject.second_house, subject.third_house,
+            subject.fourth_house, subject.fifth_house, subject.sixth_house,
+            subject.seventh_house, subject.eighth_house, subject.ninth_house,
+            subject.tenth_house, subject.eleventh_house, subject.twelfth_house
+        ]
+        house_cusps_data = [format_astro_point(h) for h in houses_to_process]
+        ascendant_data = format_astro_point(subject.ascendant)
+        midheaven_data = format_astro_point(subject.medium_coeli)
+        natal_chart_details = {
+            "birthDateTimeUTC": aware_dt.astimezone(pytz.utc).isoformat(),
+            "latitude": data.latitude,
+            "longitude": data.longitude,
+            "ascendant": ascendant_data,
+            "midheaven": midheaven_data,
+            "houseCusps": house_cusps_data,
+            "planets": planets_data,        }
+        return natal_chart_details
+    except Exception as e:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
 
-# --- MODIFIED: Daily Horoscope Endpoint to return Ephemeris Data ---
+# --- MODIFIED: Daily Horoscope Endpoint to return Ephemeris Data (full working version) ---
 @app.get("/daily-horoscope")
 async def get_daily_horoscope():
     try:
-        fixed_lat = 34.0522
-        fixed_lng = -118.2437
-        fixed_tz = "America/Los_Angeles"
+        fixed_lat = 34.0522 # Example: Los Angeles Latitude
+        fixed_lng = -118.2437 # Example: Los Angeles Longitude
+        fixed_tz = "America/Los_Angeles" # Example: Los Angeles Timezone
 
         now_local = datetime.now(pytz.timezone(fixed_tz))
 
@@ -90,7 +162,7 @@ async def get_daily_horoscope():
             tz_str=fixed_tz
         )
         
-        # --- REMOVE OR COMMENT OUT GRANULAR DEBUGGING PRINTS NOW THAT DATA IS CONFIRMED ---
+        # (Optional Debug Prints for Ephemeris Data Generation - remove if no longer needed)
         # print("\n--- Kerykeion Transits Subject Debugging ---")
         # print(f"AstrologicalSubject created: {transits_subject is not None}")
         # if transits_subject:
@@ -102,22 +174,9 @@ async def get_daily_horoscope():
         #         print(f"Formatted Sun: {format_astro_point(transits_subject.sun)}")
         #     else:
         #         print("WARNING: transits_subject.sun is None!")
-        #     print(f"Raw Moon Object: {transits_subject.moon}")
-        #     if transits_subject.moon:
-        #         print(f"Moon Name: {transits_subject.moon.name}, Position: {transits_subject.moon.position}, Sign: {transits_subject.moon.sign}")
-        #         print(f"Formatted Moon: {format_astro_point(transits_subject.moon)}")
-        #     else:
-        #         print("WARNING: transits_subject.moon is None!")
-        #     print(f"Raw First House Cusp: {transits_subject.first_house}")
-        #     if transits_subject.first_house:
-        #         print(f"First House Position: {transits_subject.first_house.position}, Sign: {transits_subject.first_house.sign}")
-        #     else:
-        #         print("WARNING: transits_subject.first_house is None!")
         # else:
         #     print("ERROR: AstrologicalSubject failed to create!")
         # print("----------------------------------------------\n")
-        # --- END REMOVED DEBUGGING PRINTS ---
-
 
         # Extract and format ephemeris data similar to natal chart details
         planets_data = [format_astro_point(p) for p in [
@@ -144,19 +203,18 @@ async def get_daily_horoscope():
             "houseCusps": house_cusps_data,
             "planets": planets_data,
         }
-        # Keep this print if you still want to see the full JSON in Python terminal
-        # import json # Make sure json is imported at the top if you keep this
+        # (Optional Debug Prints for Full Ephemeris JSON)
         # print("\n--- Raw Ephemeris Data (before OpenAI prompt) ---")
         # print(json.dumps(ephemeris_details, indent=2))
         # print("---------------------------------------------------\n")
 
-        # Prepare transit strings for the AI prompt (CHANGE transits TO transits_subject)
+        # Prepare transit strings for the AI prompt (Corrected variable name: transits_subject)
         transit_strings = []
-        for planet in [transits_subject.sun, transits_subject.moon, transits_subject.mercury, # <--- CHANGED HERE
-                       transits_subject.venus, transits_subject.mars, transits_subject.jupiter, # <--- CHANGED HERE
-                       transits_subject.saturn, transits_subject.uranus, transits_subject.neptune, # <--- CHANGED HERE
-                       transits_subject.pluto]: # <--- CHANGED HERE
-            # Guard against None objects if Kerykeion failed to produce them (already there)
+        for planet in [transits_subject.sun, transits_subject.moon, transits_subject.mercury,
+                       transits_subject.venus, transits_subject.mars, transits_subject.jupiter,
+                       transits_subject.saturn, transits_subject.uranus, transits_subject.neptune,
+                       transits_subject.pluto]:
+            # Guard against None objects if Kerykeion failed to produce them
             if planet:
                 retro = " (Retrograde)" if getattr(planet, 'retrograde', False) else ""
                 transit_strings.append(f"{planet.name} in {planet.sign}{retro}")
