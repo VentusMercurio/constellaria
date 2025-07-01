@@ -9,10 +9,15 @@ export async function GET() {
         'Content-Type': 'application/json',
       },
       // Cache this result for a few hours so we don't call OpenAI too often
-      next: { revalidate: 3600 * 4 }, 
+      next: { revalidate: 0 }, 
     });
 
     const data = await pythonApiResponse.json();
+
+       // --- ADD THIS CONSOLE.LOG ---
+    console.log("Raw JSON response from Python backend (via /api/daily-horoscope):", data);
+    // --- END CONSOLE.LOG ---
+
 
     if (!pythonApiResponse.ok) {
       return NextResponse.json({ error: data.detail || 'Python API error for horoscope' }, { status: pythonApiResponse.status });

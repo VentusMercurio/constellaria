@@ -26,7 +26,7 @@ function ChartDisplay({ chartData, timezone, onContinue }: { chartData: NatalCha
       </div>
 
       <div className="flex justify-center">
-        <ChartWheel chartData={chartData} size={300} />
+        <ChartWheel chartData={chartData} size={400} />
       </div>
 
       <BirthDetailsCard
