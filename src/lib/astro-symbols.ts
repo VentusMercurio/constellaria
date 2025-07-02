@@ -1,35 +1,45 @@
 // src/lib/astro-symbols.ts
 
-export const ZODIAC_SYMBOLS: { [key: string]: string } = {
-  Ari: 'M 50 10 L 50 90 M 20 60 L 80 60', // Aries (Placeholder)
-  Tau: 'M 20 50 C 20 30, 80 30, 80 50 L 80 70 M 50 70 L 50 90', // Taurus (Placeholder)
-  Gem: 'M 20 30 L 80 70 M 80 30 L 20 70', // Gemini (Placeholder)
-  Can: 'M 30 70 C 10 50, 10 30, 30 10 C 50 30, 50 50, 30 70 M 70 70 C 50 50, 50 30, 70 10 C 90 30, 90 50, 70 70', // Cancer (Placeholder)
-  Leo: 'M 50 90 C 70 70, 70 50, 50 30 C 30 50, 30 70, 50 90 M 50 30 L 70 10', // Leo (Placeholder)
-  Vir: 'M 30 10 L 30 90 M 70 10 L 70 90 M 30 50 L 70 50', // Virgo (Placeholder)
-  Lib: 'M 20 50 L 80 50 M 30 70 L 70 70 M 40 30 L 60 30', // Libra (Placeholder)
-  Sco: 'M 20 40 L 80 40 M 30 60 L 70 60 M 50 80 L 50 20', // Scorpio (Placeholder)
-  Sag: 'M 50 10 L 50 90 M 20 40 L 80 40', // Sagittarius (Placeholder)
-  Cap: 'M 20 80 C 20 60, 40 60, 40 40 C 40 20, 60 20, 60 40 C 60 60, 80 60, 80 40', // Capricorn (Placeholder)
-  Aqu: 'M 20 40 L 80 40 M 20 60 L 80 60', // Aquarius (Placeholder)
-  Pis: 'M 20 50 L 80 50 M 50 20 L 50 80', // Pisces (Placeholder)
+// A common viewBox for glyphs, adjust if your SVGs use a different internal coordinate system
+// e.g., if your SVGs are 100x100, use viewBox="0 0 100 100"
+export const GLYPH_VIEWBOX = "0 0 50 50"; // Standardized viewBox for simple glyph SVGs
+
+// Zodiac Sign Glyphs (12 total)
+export const ZODIAC_GLYPHS: { [key: string]: string } = {
+  // Replace these example paths with your actual extracted 'd' attributes
+  // Ensure the keys (e.g., 'Ari', 'Tau') match what your Kerykeion data uses for signs
+  Ari: "M 143.265625 143.265625 L 606.765625 143.265625 L 606.765625 606.765625 L 143.265625 606.765625 Z M 143.265625 143.265625 ", // Placeholder Aries
+  Tau: "M 134 122.164062 L 623.511719 122.164062 L 623.511719 611.914062 L 134 611.914062 Z M 134 122.164062 ", // Placeholder Taurus
+  Gem: "M 143.265625 143.265625 L 606.765625 143.265625 L 606.765625 606.765625 L 143.265625 606.765625 Z M 143.265625 143.265625 ", // Placeholder Gemini
+  Can: "M 143.265625 143.265625 L 606.765625 143.265625 L 606.765625 606.765625 L 143.265625 606.765625 Z M 143.265625 143.265625 ", // Placeholder Cancer
+  Leo: "M 143.265625 143.265625 L 606.765625 143.265625 L 606.765625 606.765625 L 143.265625 606.765625 Z M 143.265625 143.265625 ", // Placeholder Leo
+  Vir: "M 143.265625 143.265625 L 606.765625 143.265625 L 606.765625 606.765625 L 143.265625 606.765625 Z M 143.265625 143.265625 ", // Placeholder Virgo
+  Lib: "M 143.265625 143.265625 L 606.765625 143.265625 L 606.765625 606.765625 L 143.265625 606.765625 Z M 143.265625 143.265625 ", // Placeholder Libra
+  Sco: "M 221 143.265625 L 529.605469 143.265625 L 529.605469 606.765625 L 221 606.765625 Z M 221 143.265625 ", // Placeholder Scorpio
+  Sag: "M 143.265625 143.265625 L 606.765625 143.265625 L 606.765625 606.765625 L 143.265625 606.765625 Z M 143.265625 143.265625 ", // Placeholder Sagittarius
+  Cap: "M 186.339844 141 L 541 141 L 541 673 L 186.339844 673 Z M 186.339844 141 ", // Placeholder Capricorn
+  Aqu: "M 143.265625 143.265625 L 606.765625 143.265625 L 606.765625 606.765625 L 143.265625 606.765625 Z M 143.265625 143.265625", // Placeholder Aquarius
+  Pis: "M 219 135 L 573.5625 135 L 573.5625 667 L 219 667 Z M 219 135 ", // Placeholder Pisces
 };
 
-export const PLANET_SYMBOLS: { [key: string]: string } = {
-  Sun: 'M 50 20 C 70 20, 80 30, 80 50 C 80 70, 70 80, 50 80 C 30 80, 20 70, 20 50 C 20 30, 30 20, 50 20 M 50 30 L 50 70 M 30 50 L 70 50', // Sun (Placeholder)
-  Moon: 'M 70 30 C 70 10, 30 10, 30 30 C 30 50, 50 70, 70 90 L 70 30 Z', // Moon (Placeholder)
-  Mercury: 'M 50 10 C 30 10, 30 30, 50 50 C 70 50, 70 30, 50 10 M 20 70 L 80 70 M 50 50 L 50 90', // Mercury (Placeholder)
-  Venus: 'M 50 10 L 50 60 M 30 40 L 70 40 M 50 70 C 30 70, 20 80, 20 90 C 20 90, 80 90, 80 90 C 80 80, 70 70, 50 70', // Venus (Placeholder)
-  Mars: 'M 20 80 L 80 20 M 20 20 C 20 40, 40 40, 40 20 M 60 80 C 60 60, 80 60, 80 80', // Mars (Placeholder)
-  Jupiter: 'M 50 10 L 50 90 M 30 40 L 70 40 M 40 70 L 60 70', // Jupiter (Placeholder)
-  Saturn: 'M 20 50 L 80 50 M 30 70 L 70 70 M 40 30 L 60 30', // Saturn (Placeholder)
-  Uranus: 'M 50 10 C 30 10, 20 30, 20 50 L 20 70 M 80 70 L 80 50 C 80 30, 70 10, 50 10 M 50 30 L 50 90', // Uranus (Placeholder)
-  Neptune: 'M 20 20 L 80 80 M 80 20 L 20 80 M 50 50 C 70 50, 70 70, 50 70 C 30 70, 30 50, 50 50', // Neptune (Placeholder)
-  Pluto: 'M 20 20 L 80 80 M 80 20 L 20 80', // Pluto (Placeholder)
-  Ascendant: 'M 50 10 L 50 90 M 20 60 L 80 60', // Ascendant (same as Aries for now, adjust later)
-  Medium_Coeli: 'M 50 10 L 50 90 M 20 60 L 80 60', // Midheaven (same as Aries for now, adjust later)
+// Planetary Glyphs (10 total)
+export const PLANET_GLYPHS: { [key: string]: string } = {
+  // Replace these example paths with your actual extracted 'd' attributes
+  // Ensure the keys (e.g., 'Sun', 'Moon') match what your Kerykeion data uses for planet names
+  Sun: "M 143.265625 143.265625 L 606.765625 143.265625 L 606.765625 606.765625 L 143.265625 606.765625 Z M 143.265625 143.265625 ", // Placeholder Sun
+  Moon: "M 164.261719 75 L 585.761719 75 L 585.761719 707 L 164.261719 707 Z M 164.261719 75 ", // Placeholder Moon
+  Mercury: "M 197.242188 171 L 660.742188 171 L 660.742188 634 L 197.242188 634 Z M 197.242188 171 ", // Placeholder Mercury
+  Venus: "M 121.246094 165 L 584.746094 165 L 584.746094 628 L 121.246094 628 Z M 121.246094 165 ", // Placeholder Venus
+  Mars: "M 143.265625 143.265625 L 606.765625 143.265625 L 606.765625 606.765625 L 143.265625 606.765625 Z M 143.265625 143.265625 ", // Placeholder Mars
+  Jupiter: "M 140 56.019531 L 565 56.019531 L 565 694 L 140 694 Z M 140 56.019531 ", // Placeholder Jupiter
+  Saturn: "M 166.089844 160 L 629.589844 160 L 629.589844 623 L 166.089844 623 Z M 166.089844 160 ", // Placeholder Saturn
+  Uranus: "M 25 5 C 15 5, 10 15, 10 25 L 10 35 M 40 35 L 40 25 C 40 15, 35 5, 25 5 M 25 15 L 25 45", // Placeholder Uranus
+  Neptune: "M 143.265625 143.265625 L 606.765625 143.265625 L 606.765625 606.765625 L 143.265625 606.765625 Z M 143.265625 143.265625 ", // Placeholder Neptune
+  Pluto: "M 111.3125 176.261719 L 695.5625 176.261719 L 695.5625 750 L 111.3125 750 Z M 111.3125 176.261719 ", // Placeholder Pluto
+  // For angles, reuse planet glyphs or create simple ones if desired
+  Ascendant: "M 25 5 L 25 45 M 10 30 L 40 30", // Placeholder (same as Aries for now)
+  Medium_Coeli: "M 25 5 L 25 45 M 10 30 L 40 30", // Placeholder (same as Aries for now)
 };
 
-// These are simplified placeholder SVGs. For a production app,
-// you would use more accurate/aesthetic designs or an astrological font.
-// Example of a proper path for Sun: 'M50,0 C22.386,0,0,22.386,0,50 C0,77.614,22.386,100,50,100 C77.614,100,100,77.614,100,50 C100,22.386,77.614,0,50,0 M50,22.5 L50,77.5 M22.5,50 L77.5,50'
+// You'll also need a retrograde symbol. If you have one, add it here.
+export const RETROGRADE_GLYPH: string = "M25 5 L25 45 M15 15 L35 15 L35 25 L15 25 Z"; // Placeholder R
