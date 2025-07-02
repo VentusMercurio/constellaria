@@ -70,7 +70,7 @@ export default function RegisterPage() {
         {/* <--- 6. Content wrapper (positioned above overlay) */}
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 text-center">
           <h1 className="font-serif text-4xl mb-4">Account Created</h1>
-          <p className="text-gray-300 mb-6">Your place in the cosmos has been reserved.</p>
+          <p className="text-gray-300 mb-6">Please check your email for a login link.</p>
           <Link href="/auth/login">
             <span className="font-sans font-bold text-white px-8 py-3 rounded-full bg-button-gradient hover:bg-button-gradient-hover">
               Proceed to Login
