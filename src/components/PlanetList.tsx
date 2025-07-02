@@ -1,12 +1,13 @@
 // src/components/PlanetList.tsx
 import React from 'react';
-import { AstrologicalPoint } from '@/types/astrology';
+import Image from 'next/image'; // For glyphs inside the list
+import { AstrologicalPoint } from '@/types/astrology'; // Make sure this path is correct
+import { PLANET_GLYPH_PATHS } from '@/lib/astro-symbols'; // Import glyph paths
 
 interface PlanetListProps {
   planets: AstrologicalPoint[];
 }
 
-// Helper to format house names (from "Ninth_House" to "9th House")
 function formatHouseName(house: string | null | undefined): string {
   if (!house) return '';
   const parts = house.split('_');
@@ -17,65 +18,87 @@ function formatHouseName(house: string | null | undefined): string {
     'Sixth': '6th', 'Seventh': '7th', 'Eighth': '8th', 'Ninth': '9th', 'Tenth': '10th',
     'Eleventh': '11th', 'Twelfth': '12th'
   };
-  return `${suffixMap[houseNumber] || houseNumber} House`; // Added " House" to match mockup
+  return `${suffixMap[houseNumber] || houseNumber} House`;
 }
 
-// Function to get short sign name (e.g., "Lib", "Can") or full if needed
 const getShortSign = (sign: string): string => {
-    switch(sign) {
-        case 'Ari': return 'Ari';
-        case 'Tau': return 'Tau';
-        case 'Gem': return 'Gem';
-        case 'Can': return 'Can';
-        case 'Leo': return 'Leo';
-        case 'Vir': return 'Vir';
-        case 'Lib': return 'Lib';
-        case 'Sco': return 'Sco';
-        case 'Sag': return 'Sag';
-        case 'Cap': return 'Cap';
-        case 'Aqu': return 'Aqu';
-        case 'Pis': return 'Pis';
-        default: return sign; // Fallback
-    }
+    return sign; // Assuming kerykeion returns short forms (Lib, Can, etc.)
 }
+
+// Temporary placeholder interpretations for the mockup.
+// In a full implementation, these would come from your backend.
+const TEMPORARY_INTERPRETATIONS: { [key: string]: string } = {
+    "Sun": "Balance and harmony in values",
+    "Moon": "Emotional discipline in creativity",
+    "Mercury": "Deep and perceptive communication",
+    "Venus": "Practicality in social connections",
+    "Mars": "Assertive energy and drive",
+    "Jupiter": "Expansion and growth in wisdom",
+    "Saturn": "Structure and discipline in reality",
+    "Uranus": "Innovation and sudden change",
+    "Neptune": "Intuition and spiritual connection",
+    "Pluto": "Transformation and profound insight",
+};
 
 
 const PlanetList: React.FC<PlanetListProps> = ({ planets }) => {
-    // Separate planets into two columns (simple split for 10 planets: 5 per column)
-    const leftColumnPlanets = planets.slice(0, 5);
-    const rightColumnPlanets = planets.slice(5, 10);
+    const filteredPlanets = planets.filter(p => 
+        !['Ascendant', 'Medium_Coeli'].includes(p.name)
+    );
+
+    const leftColumnPlanets = filteredPlanets.slice(0, 5);
+    const rightColumnPlanets = filteredPlanets.slice(5, 10);
 
   return (
-    <div className="text-gray-300 font-serif text-lg"> {/* Base styling for the list */}
-        <div className="grid grid-cols-2 gap-x-8 gap-y-4"> {/* Two column grid */}
+    <div className="text-gray-300 font-serif text-lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6"> {/* Use md:grid-cols-2 for desktop */}
             
             {/* Left Column */}
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-6">
                 {leftColumnPlanets.map((planet) => (
-                    <div key={planet.name}>
-                        <p className="font-bold text-amber-400">{planet.name}</p>
-                        <p>{planet.formattedPosition} {planet.isRetrograde ? <span className="text-red-400">(R)</span> : ''}</p>
-                        <p>{getShortSign(planet.sign)}</p>
-                        <p>{planet.house ? formatHouseName(planet.house) : ''}</p>
+                    <div key={planet.name} className="relative p-4 rounded-lg border border-amber-400 bg-gray-900 bg-opacity-70 shadow-md flex items-start space-x-3">
+                        {/* Planet Glyph */}
+                        <Image
+                            src={PLANET_GLYPH_PATHS[planet.name] || ''} // Provide fallback empty string if path is missing
+                            alt={`${planet.name} Glyph`}
+                            width={32} // Adjust size for list
+                            height={32}
+                            className="object-contain flex-shrink-0"
+                            unoptimized
+                        />
+                        <div className="flex flex-col text-left">
+                            <p className="font-bold text-amber-400 text-xl leading-tight tracking-wide">{planet.name}</p>
+                            <p className="text-gray-300 text-base leading-tight">{planet.formattedPosition} {getShortSign(planet.sign)}</p>
+                            <p className="text-gray-300 text-base leading-tight">{planet.house ? formatHouseName(planet.house) : ''}</p>
+                            <p className="text-gray-400 text-sm mt-1 leading-tight">{TEMPORARY_INTERPRETATIONS[planet.name] || 'Cosmic influence unknown'}</p>
+                        </div>
                     </div>
                 ))}
             </div>
 
             {/* Right Column */}
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-6">
                 {rightColumnPlanets.map((planet) => (
-                    <div key={planet.name}>
-                        <p className="font-bold text-amber-400">{planet.name}</p>
-                        <p>{planet.formattedPosition} {planet.isRetrograde ? <span className="text-red-400">(R)</span> : ''}</p>
-                        <p>{getShortSign(planet.sign)}</p>
-                        <p>{planet.house ? formatHouseName(planet.house) : ''}</p>
+                    <div key={planet.name} className="relative p-4 rounded-lg border border-amber-400 bg-gray-900 bg-opacity-70 shadow-md flex items-start space-x-3">
+                        {/* Planet Glyph */}
+                        <Image
+                            src={PLANET_GLYPH_PATHS[planet.name] || ''}
+                            alt={`${planet.name} Glyph`}
+                            width={32}
+                            height={32}
+                            className="object-contain flex-shrink-0"
+                            unoptimized
+                        />
+                        <div className="flex flex-col text-left">
+                            <p className="font-bold text-amber-400 text-xl leading-tight tracking-wide">{planet.name}</p>
+                            <p className="text-gray-300 text-base leading-tight">{planet.formattedPosition} {getShortSign(planet.sign)}</p>
+                            <p className="text-gray-300 text-base leading-tight">{planet.house ? formatHouseName(planet.house) : ''}</p>
+                            <p className="text-gray-400 text-sm mt-1 leading-tight">{TEMPORARY_INTERPRETATIONS[planet.name] || 'Cosmic influence unknown'}</p>
+                        </div>
                     </div>
                 ))}
             </div>
         </div>
-        
-        {/* You may want to add Ascendant/Midheaven/House Cusps in similar styled sections */}
-        {/* For now, just focus on planets as per the immediate request */}
     </div>
   );
 };
