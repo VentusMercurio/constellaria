@@ -35,9 +35,25 @@ export const PLANET_GLYPH_PATHS: { [key: string]: string } = {
   Uranus: '/images/astro-glyphs/uranus.svg',
   Neptune: '/images/astro-glyphs/neptune.svg',
   Pluto: '/images/astro-glyphs/pluto.svg',
-  Ascendant: '/images/astro-glyphs/ascendant.svg', // Example for Ascendant glyph
-  Medium_Coeli: '/images/astro-glyphs/mc.svg', // Example for Midheaven glyph
+  Ascendant: '/images/astro-glyphs/ascendant.png', // Example for Ascendant glyph
+  Medium_Coeli: '/images/astro-glyphs/mc.png', // Example for Midheaven glyph
 };
 
 // Retrograde Symbol File Path
 export const RETROGRADE_GLYPH_PATH: string = '/images/astro-glyphs/retrograde.svg'; // Example filename
+
+// --- NEW: Starting Longitude for each Zodiac Sign (in 0-360 degrees) ---
+export const ZODIAC_SIGN_START_LONGITUDE: { [key: string]: number } = {
+  Ari: 0,
+  Tau: 30,
+  Gem: 60,
+  Can: 90,
+  Leo: 120,
+  Vir: 150,
+  Lib: 180,
+  Sco: 210,
+  Sag: 240,
+  Cap: 270,
+  Aqu: 300,
+  Pis: 330,
+};
