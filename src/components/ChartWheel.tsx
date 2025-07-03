@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import { AstrologicalPoint, NatalChartDetails } from '@/types/astrology';
 
+// Import the glyph file paths
 import { PLANET_GLYPH_PATHS, RETROGRADE_GLYPH_PATH, ZODIAC_SIGN_START_LONGITUDE } from '@/lib/astro-symbols';
 
 interface ChartWheelProps {
@@ -14,14 +15,22 @@ const ChartWheel: React.FC<ChartWheelProps> = ({ chartData, size = 700 }) => {
   const centerX = size / 2;
   const centerY = size / 2;
 
+  // --- Diagnostic Radii and Tick Mark Parameters ---
+  // These define the size and placement of the temporary diagnostic elements
   const diagnosticCircleRadius = centerX; // Full radius of the diagnostic circle
-  const zodiacTestRadius = diagnosticCircleRadius * 0.9; // Radius for placing zodiac symbols
-  const planetOrbitRadius = size * 0.35; // Fine-tune this visually
-
-  // Radii for the degree tick marks - these will need visual fine-tuning
+  const zodiacTestRadius = diagnosticCircleRadius * 0.85; // Radius for placing zodiac symbols (adjusted slightly inward)
   const degreeTickOuterRadius = diagnosticCircleRadius; // Extends to the outer edge of the diagnostic circle
   const degreeTickInnerRadius = diagnosticCircleRadius * 0.98; // Short tick marks
   const tenDegreeTickInnerRadius = diagnosticCircleRadius * 0.96; // Slightly longer for every 10 degrees
+  // --- END Diagnostic Parameters ---
+
+  // --- Planetary Orbit Radius ---
+  // This is the CRUCIAL radius for your planet glyphs.
+  // It needs to be adjusted based on the specific "ring" on your background image.
+  // Start with 0.35 and fine-tune (e.g., 0.3, 0.4, 0.45)
+  const planetOrbitRadius = size * 0.35; 
+  // --- END Planetary Orbit Radius ---
+
 
   // Helper to convert astrological longitude (0-360, Aries at 0, counter-clockwise)
   // to STANDARD TRIGONOMETRIC ANGLE (0-360, 0 is right, counter-clockwise).
@@ -38,7 +47,7 @@ const ChartWheel: React.FC<ChartWheelProps> = ({ chartData, size = 700 }) => {
     };
   };
 
-  // Calculate Absolute Longitude helper (KEEP EXISTING)
+  // Calculate Absolute Longitude helper (from degreeInSign and sign)
   const calculateAbsoluteLongitude = (point: AstrologicalPoint): number => {
     const signStart = ZODIAC_SIGN_START_LONGITUDE[point.sign];
     if (signStart === undefined) {
@@ -48,12 +57,90 @@ const ChartWheel: React.FC<ChartWheelProps> = ({ chartData, size = 700 }) => {
     return signStart + point.longitude;
   };
 
-  // Zodiac Unicode Mapping (KEEP EXISTING)
+  // Zodiac Unicode Mapping (for diagnostic labels)
   const ZODIAC_UNICODE: { [key: string]: string } = {
     Ari: '\u2648', Tau: '\u2649', Gem: '\u264A', Can: '\u264B', Leo: '\u264C',
     Vir: '\u264D', Lib: '\u264E', Sco: '\u264F', Sag: '\u2650', Cap: '\u2651',
     Aqu: '\u2652', Pis: '\u2653',
   };
+
+  // --- NEW: Conjunction Offsetting Logic (from previous steps) ---
+  const conjunctionTolerance = 10; // Degrees within which planets are considered in conjunction
+  const radialOffsetStep = 40;     // Pixels to offset each planet in a conjunction.
+
+  // Helper function for conjunction offsetting
+  const getAdjustedPlanetPositions = (
+    planets: AstrologicalPoint[],
+    tolerance: number,
+    offsetStep: number
+  ): (AstrologicalPoint & { adjustedRadialOffset?: number; trueLongitude?: number; })[] => {
+    let adjustedPlanets: (AstrologicalPoint & { trueLongitude?: number; })[] = planets
+      .map(p => ({ ...p, trueLongitude: calculateAbsoluteLongitude(p) }))
+      .sort((a, b) => a.trueLongitude! - b.trueLongitude!);
+
+    const conjunctionGroups: (typeof adjustedPlanets)[] = [];
+    let currentGroup: typeof adjustedPlanets = [];
+
+    for (let i = 0; i < adjustedPlanets.length; i++) {
+      const currentPlanet = adjustedPlanets[i];
+      if (currentGroup.length === 0) {
+        currentGroup.push(currentPlanet);
+      } else {
+        const lastPlanetInGroup = currentGroup[currentGroup.length - 1];
+        const diff = Math.abs(currentPlanet.trueLongitude! - lastPlanetInGroup.trueLongitude!);
+        const wrappedDiff = 360 - diff;
+
+        if (Math.min(diff, wrappedDiff) <= tolerance) {
+          currentGroup.push(currentPlanet);
+        } else {
+          conjunctionGroups.push(currentGroup);
+          currentGroup = [currentPlanet];
+        }
+      }
+    }
+    if (currentGroup.length > 0) {
+      conjunctionGroups.push(currentGroup);
+    }
+
+    if (conjunctionGroups.length > 1 && conjunctionGroups[0].length > 0 && conjunctionGroups[conjunctionGroups.length - 1].length > 0) {
+      const firstPlanetOfFirstGroup = conjunctionGroups[0][0];
+      const lastPlanetOfLastGroup = conjunctionGroups[conjunctionGroups.length - 1][conjunctionGroups[conjunctionGroups.length - 1].length - 1];
+      const diff = Math.abs(firstPlanetOfFirstGroup.trueLongitude! + 360 - lastPlanetOfLastGroup.trueLongitude!);
+      if (diff <= tolerance) {
+        conjunctionGroups[conjunctionGroups.length - 1] = conjunctionGroups[conjunctionGroups.length - 1].concat(conjunctionGroups[0]);
+        conjunctionGroups.shift();
+      }
+    }
+
+    const finalPositions: (AstrologicalPoint & { adjustedRadialOffset?: number; trueLongitude?: number; })[] = [];
+    conjunctionGroups.forEach(group => {
+      if (group.length === 1) {
+        finalPositions.push({ ...group[0], adjustedRadialOffset: 0 });
+      } else {
+        const numToOffset = group.length;
+        const totalOffsetSpan = (numToOffset - 1) * offsetStep;
+        const startOffset = -totalOffsetSpan / 2;
+
+        group.forEach((planet, index) => {
+          finalPositions.push({
+            ...planet,
+            adjustedRadialOffset: startOffset + index * offsetStep,
+          });
+        });
+      }
+    });
+
+    return finalPositions.sort((a, b) => a.trueLongitude! - b.trueLongitude!);
+  };
+  // --- END Conjunction Offsetting Logic ---
+
+  // Prepare planets with conjunction offsets for rendering
+  const planetsToRender = getAdjustedPlanetPositions(
+    [...chartData.planets, chartData.ascendant, chartData.midheaven].filter(Boolean),
+    conjunctionTolerance,
+    radialOffsetStep
+  );
+
 
   return (
     <svg width="100%" height="100%" viewBox={`0 0 ${size} ${size}`} className="absolute inset-0 pointer-events-none z-[-1]">
@@ -73,7 +160,7 @@ const ChartWheel: React.FC<ChartWheelProps> = ({ chartData, size = 700 }) => {
       <text x={centerX} y={size - 10} fontSize="20" fill="white" dominantBaseline="ideographic" textAnchor="middle">270° (Bottom)</text>
       {/* --- END DIAGNOSTIC CIRCLE AND LINES --- */}
 
-      {/* --- Zodiac Sign Wedge Lines & Symbols (KEEP EXISTING) --- */}
+      {/* --- Zodiac Sign Wedge Lines & Symbols --- */}
       {Object.keys(ZODIAC_SIGN_START_LONGITUDE).map((signKey) => {
         const startLong = ZODIAC_SIGN_START_LONGITUDE[signKey];
         const svgAngle = getSvgAngle(startLong);
@@ -88,7 +175,7 @@ const ChartWheel: React.FC<ChartWheelProps> = ({ chartData, size = 700 }) => {
           <g key={`wedge-${signKey}`}>
             {/* Wedge Line */}
             <line x1={centerX} y1={centerY} x2={coords.x} y2={coords.y}
-                  stroke="rgba(178, 183, 21, 0.5)" strokeWidth="1" />
+                  stroke="rgba(0,255,0,0.5)" strokeWidth="1" />
 
             {/* Zodiac Symbol (Unicode) */}
             <text
@@ -107,18 +194,18 @@ const ChartWheel: React.FC<ChartWheelProps> = ({ chartData, size = 700 }) => {
       })}
       {/* --- END ZODIAC SIGN UNICODE SYMBOLS --- */}
 
-      {/* --- NEW DIAGNOSTIC: DEGREE TICK MARKS --- */}
-      {[...Array(360)].map((_, degree) => { // Loop for every degree (0 to 359)
-        if (degree % 10 === 0) { // Only draw a tick for every 10th degree
+      {/* --- DEGREE TICK MARKS --- */}
+      {[...Array(360)].map((_, degree) => {
+        if (degree % 10 === 0) {
           const svgAngle = getSvgAngle(degree);
           
           let innerRadiusForTick = degreeTickInnerRadius;
-          let tickColor = "rgba(255,255,255,0.3)"; // Lighter tick color
+          let tickColor = "rgba(255,255,255,0.3)";
           let tickWidth = 0.5;
 
-          if (degree % 30 === 0) { // Longer tick for start of each sign (0, 30, 60, etc.)
-            innerRadiusForTick = degreeTickInnerRadius; // Keep same as outer, but this can be adjusted
-            tickColor = "rgba(255,255,255,0.7)"; // Brighter for sign boundaries
+          if (degree % 30 === 0) {
+            innerRadiusForTick = tenDegreeTickInnerRadius; // Use the longer tick radius
+            tickColor = "rgba(255,255,255,0.7)";
             tickWidth = 1;
           }
 
@@ -135,23 +222,20 @@ const ChartWheel: React.FC<ChartWheelProps> = ({ chartData, size = 700 }) => {
             />
           );
         }
-        return null; // Don't draw for other degrees
+        return null;
       })}
-      {/* --- END NEW DIAGNOSTIC --- */}
+      {/* --- END DEGREE TICK MARKS --- */}
 
 
       {/* Planet Glyphs and Angles (Ascendant, Midheaven) */}
-      {[...chartData.planets, chartData.ascendant, chartData.midheaven].filter(Boolean).map((obj, index) => {
-        // ... (existing planet rendering code) ...
-        const trueLongitude = calculateAbsoluteLongitude(obj);
-        console.log(`[ChartWheel DEBUG] Plotting ${obj.name}: Input Longitude=${obj.longitude}, Sign=${obj.sign}`);
-        console.log(`[ChartWheel DEBUG] ${obj.name}: Calculated True Longitude=${trueLongitude}, Calculated SVG Angle=${getSvgAngle(trueLongitude)}`);
+      {planetsToRender.map((obj, index) => { // Use planetsToRender array
+        const glyphAngle = getSvgAngle(obj.trueLongitude!); // Use true longitude
+        // Add adjustedRadialOffset to planetOrbitRadius
+        const finalOrbitRadius = planetOrbitRadius + (obj.adjustedRadialOffset || 0);
+        const glyphCoords = getCoordinates(glyphAngle, finalOrbitRadius);
 
-        const glyphAngle = getSvgAngle(trueLongitude);
-        const glyphCoords = getCoordinates(glyphAngle, planetOrbitRadius);
-
-        const glyphSize = 120; // Adjust this
-        const textRadialOffset = glyphSize * 0.9; // Adjust this
+        const glyphSize = 95; // <--- This will need fine-tuning
+        const textRadialOffset = glyphSize * 0.7; // <--- This will need fine-tuning
         
         const planetOrAngleKey = obj.name === 'Ascendant' ? 'Ascendant' : obj.name === 'Medium_Coeli' ? 'Medium_Coeli' : obj.name;
         const glyphPath = PLANET_GLYPH_PATHS[planetOrAngleKey];
@@ -164,7 +248,7 @@ const ChartWheel: React.FC<ChartWheelProps> = ({ chartData, size = 700 }) => {
         return (
           <foreignObject
             key={`${obj.name}-${index}`}
-            x={glyphCoords.x - glyphSize / 2}
+            x={glyphCoords.x - glyphSize / 2} // Center glyph at its coordinates
             y={glyphCoords.y - glyphSize / 2}
             width={glyphSize}
             height={glyphSize}
@@ -178,17 +262,21 @@ const ChartWheel: React.FC<ChartWheelProps> = ({ chartData, size = 700 }) => {
               className="object-contain"
               unoptimized
             />
+            {/* Degree and Sign Text */}
             <div
               style={{
                 position: 'absolute',
-                left: `${glyphSize / 2}px`,
-                top: `${glyphSize / 2}px`,
-                transform: `translate(${textRadialOffset * Math.cos(glyphAngle * Math.PI / 180)}, ${-textRadialOffset * Math.sin(glyphAngle * Math.PI / 180)}) translate(-50%, -50%)`,
+                // Position text relative to the glyph's center, along the radial line
+                // This will likely need fine-tuning with x/y/transform based on your specific font/sizing
+                left: `${glyphSize / 2}px`, // Center horizontally relative to foreignObject
+                top: `${glyphSize / 2}px`,  // Center vertically relative to foreignObject
+                transform: `translate(${textRadialOffset * Math.cos(glyphAngle * Math.PI / 180)}, ${-textRadialOffset * Math.sin(glyphAngle * Math.PI / 180)}) translate(-50%, -50%)`, // Combined transform
                 fontSize: '14px',
                 color: '#ecc94b',
                 textAlign: 'center',
                 whiteSpace: 'nowrap',
                 pointerEvents: 'auto',
+                // border: '1px solid red', // Temp debug border
               }}
             >
               {obj.formattedPosition.split(' ')[0]}
